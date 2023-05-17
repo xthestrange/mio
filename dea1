@@ -4,10 +4,10 @@
 
 /* ROOM */
 
-const roomName = "<𝐂𝐋>| 𝐆𝐨𝐝 𝐱𝟒 𝐋𝐞𝐚𝐠𝐮𝐞 |🙏🏆";
+const roomName = "<𝙲𝙻>| 𝐆𝐨𝐝 𝐱𝟒 𝐋𝐞𝐚𝐠𝐮𝐞 |🙏🏆";
 const botName = "🙏| 𝐆𝐨𝐝 |🙏";
 const maxPlayers = 25;
-const roomPublic = false;
+const roomPublic = true;
 const geo = [{"code": "no", "lat": -33.456, "lon": -70.648}];
 
 const room = HBInit({ roomName: roomName, maxPlayers: maxPlayers, public: roomPublic, playerName: botName, geo: geo[0] });
@@ -22,6 +22,14 @@ const scoreLimitBig = 3;
 const timeLimitClassic = 3;
 const timeLimitBig = 4;
 
+var isTimeAddedShown = false;
+var isTimeAddedShowndos = false;
+var isTimeAddedShowntres = false;
+var isTimeAddedShowncuatro = false;
+var isTimeAddedShowncinco = false;
+var isTimeAddedShownseis = false;
+var isTimeAddedShownquince = false;
+var isTimeAddedShownsiete = false;
 room.setTeamsLock(true);
 
 var adminPassword = 1000 + getRandomInt(9000);
@@ -94,6 +102,14 @@ var endGameVariable = false; // This variable with the one below helps distingui
 var resettingTeams = false;
 var capLeft = false;
 var statInterval = 6;
+var cr7Cooldown = 25000; // Tiempo de enfriamiento en milisegundos (30 segundos)
+var cr7Cooldowns = {}; // Objeto para rastrear los tiempos de enfriamiento por jugador
+var cr7Phrases = [
+  "𝚂𝙸𝚄𝚄𝚄𝚄𝚄𝚄𝚄𝚄𝚄𝚄𝚄𝚄𝚄!! ⚽",
+  "𝙼𝚎 𝚝𝚒𝚎𝚗𝚎𝚗 𝚎𝚗𝚟𝚒𝚍𝚒𝚊 𝚙𝚘𝚛𝚚𝚞𝚎 𝚜𝚘𝚢 𝚐𝚞𝚊𝚙𝚘, 𝚛𝚒𝚌𝚘 𝚢 𝚋𝚞𝚎𝚗 𝚓𝚞𝚐𝚊𝚍𝚘𝚛. 🤫",
+  "𝙲𝚊𝚕𝚖𝚊, 𝚌𝚊𝚕𝚖𝚊, 𝚊𝚚𝚞í 𝚎𝚜𝚝𝚘𝚢! ✋",
+  "𝚀𝚞𝚒𝚣á𝚜 𝚖𝚎 𝚘𝚍𝚒𝚊𝚗 𝚙𝚘𝚛𝚚𝚞𝚎 𝚜𝚘𝚢 𝚖𝚞𝚢 𝚋𝚞𝚎𝚗𝚘. 🤷‍♂️"
+];
 let canUseTulaCommand = {};
 
 loadMap(aloneMap, 0, 0);
@@ -145,6 +161,20 @@ function getTime(scores) { // returns the current time of the game
 	return "[" + Math.floor(Math.floor(scores.time/60)/10).toString() + Math.floor(Math.floor(scores.time/60)%10).toString() + ":" + Math.floor(Math.floor(scores.time - (Math.floor(scores.time/60) * 60))/10).toString() + Math.floor(Math.floor(scores.time - (Math.floor(scores.time/60) * 60))%10).toString() + "]"
 }
 
+function getRandomPhrase() {
+  var randomIndex = Math.floor(Math.random() * cr7Phrases.length);
+  return cr7Phrases[randomIndex];
+}
+
+function canUseCr7(player) {
+    var currentTime = new Date().getTime(); // Obtener el tiempo actual en milisegundos
+    if (!(player.id in cr7Cooldowns)) {
+        return true; // Permitir el uso si es la primera vez que el jugador usa el comando
+    }
+    var lastCr7Time = cr7Cooldowns[player.id]; // Obtener el último tiempo en que se usó el comando por el jugador
+    return (currentTime - lastCr7Time >= cr7Cooldown);
+}
+
 function pointDistance(p1, p2) {
 	var d1 = p1.x - p2.x;
 	var d2 = p1.y - p2.y;
@@ -167,6 +197,41 @@ function useTulaCommand(player) {
 }
 
 /* BUTTONS */
+
+function PublicitaDiscord(player) {
+    var scores = room.getScores();
+    if (scores.time > 60 && !isTimeAddedShownseis) {
+    room.sendAnnouncement("                                        ▒█▀▀▄ ▀█▀ ▒█▀▀▀█ ▒█▀▀█ ▒█▀▀▀█ ▒█▀▀█ ▒█▀▀▄ ", null, 0xffcd2c, "bold")
+    room.sendAnnouncement("                                        ▒█░▒█ ▒█░ ░▀▀▀▄▄ ▒█░░░ ▒█░░▒█ ▒█▄▄▀ ▒█░▒█ ", null, 0xea8f73, "bold")
+    room.sendAnnouncement("                                        ▒█▄▄▀ ▄█▄ ▒█▄▄▄█ ▒█▄▄█ ▒█▄▄▄█ ▒█░▒█ ▒█▄▄▀ ", null, 0xd757b3, "bold");
+    room.sendAnnouncement("                                        💬  https://discord.gg/gPhuf9CF ⬅⬅⬅ 𝐆𝐨𝐝 𝐋𝐞𝐚𝐠𝐮𝐞 𝐱𝟒 [𝗡𝘂𝗲𝘃𝗼]", null, 0xf1ff33, "bold");
+    isTimeAddedShownseis = true;
+    }
+}
+
+function PublicitaDonacion(player) {
+    var scores = room.getScores();
+    if (scores.time > 120 && !isTimeAddedShownsiete) {
+    room.sendAnnouncement("「📣」 ¡𝐑𝐞𝐜𝐮𝐞𝐫𝐝𝐚 𝐍𝐎 𝐈𝐍𝐒𝐔𝐋𝐓𝐎𝐒 𝐎 𝐒𝐏𝐀𝐌, 𝐨 𝐬𝐞𝐫𝐚𝐬 𝐦𝐮𝐭𝐞𝐚𝐝𝐨!", player, 0xFFA200, "bold");
+    isTimeAddedShownsiete = true;
+    }
+}
+
+function PublicitaHelp(player) {
+    var scores = room.getScores();
+    if (scores.time > 20 && !isTimeAddedShowncinco) {
+    room.sendAnnouncement("「📣」 ¡𝗨𝘀𝗮 '!𝗮𝘆𝘂𝗱𝗮' 𝗽𝗮𝗿𝗮 𝘃𝗲𝗿 𝗹𝗮 𝗹𝗶𝘀𝘁𝗮 𝗱𝗲 𝗰𝗼𝗺𝗮𝗻𝗱𝗼𝘀 𝗱𝗶𝘀𝗽𝗼𝗻𝗶𝗯𝗹𝗲𝘀!", player, 0xFFA200, "bold");
+    isTimeAddedShowncinco = true;
+    }
+}
+
+function PublicitaLiga(player) {
+    var scores = room.getScores();
+    if (scores.time > 180 && !isTimeAddedShowncuatro) {
+    room.sendAnnouncement("「📣」 𝐓𝐞𝐧𝐞𝐦𝐨𝐬 𝐮𝐧 𝐬𝐞𝐫𝐯𝐞𝐫 𝐝𝐞 𝐝𝐢𝐬𝐜𝐨𝐫𝐝 𝐩𝐚𝐫𝐚 𝐥𝐚 𝐜𝐨𝐦𝐮𝐧𝐢𝐝𝐚𝐝. 𝗠𝗮𝘀 𝗶𝗻𝗳𝗼𝗿𝗺𝗮𝗰𝗶𝗼𝗻 𝘂𝘀𝗮𝗻𝗱𝗼 '!𝗱𝗶𝘀𝗰𝗼𝗿𝗱'", player, 0xFFA200, "bold");
+    isTimeAddedShowncuatro = true;
+    }
+}
 
 function topBtn() {
 	if (teamS.length == 0) {
@@ -275,7 +340,7 @@ function checkTime() {
 			return;
 		}
 		goldenGoal = true;
-		room.sendChat("⚽ Gol gana !");
+		room.sendChat("⚽ Gol de Oro!");
 	}
 	if (Math.abs(drawTimeLimit * 60 - scores.time - 60) <= 0.01 && players.length > 2) {
 		if (checkTimeVariable == false) {
@@ -778,7 +843,7 @@ room.onPlayerJoin = function(player) {
 	room.sendAnnouncement("👋👋 Bienvenido " + player.name + " ! Escribe '!ayuda' para ver los comandos.", player.id, 0xFFA200, "bold");
 	if (localStorage.getItem(player.auth) != null) {
         var playerData = JSON.parse(localStorage.getItem(player.auth));
-        if (playerData[Ss.RL] != "player") {
+        if (playerData[Ss.RL] != "player" && playerData[Ss.RL] != "vip") {
             room.setPlayerAdmin(player.id, true);
             var announcementColor = (playerData[Ss.RL] == "master") ? 0xFFFF00 : 0x3BF5F5;
             var announcementText = (playerData[Ss.RL] == "master") ? "𝙼𝚊𝚜𝚝𝚎𝚛 " : "𝙰𝚍𝚖𝚒𝚗 ";
@@ -876,9 +941,9 @@ room.onPlayerChat = function (player, message) {
 	message = message.split(/ +/);
 	player.team != Team.SPECTATORS ? setActivity(player, 0) : null;
 	if (["!ayuda"].includes(message[0].toLowerCase())) {
-		room.sendAnnouncement("[📄] Comandos : !me, !mostrarstats, !rangos, !juegos, !victorias, !goles, !asist, !cs, !afks, !mutes, !bans.", player.id,0xFFFFFF,"bold");
-		room.sendAnnouncement("[🤑] 𝙲𝚘𝚖𝚊𝚗𝚍𝚘𝚜 𝚎𝚜𝚙𝚎𝚌𝚒𝚊𝚕𝚎𝚜 : !𝚝𝚞𝚕𝚊, !𝚋𝚎𝚜𝚘 @jugador.", player.id,0xFF7900,"bold");
-		player.admin ? room.sendAnnouncement("[📄] Admin : !mute <duration = 3> #<id>, !unmute, !clearbans, !slow <duration>, !endslow, !pass.", player.id,0xFFFFFF,"bold") : null;
+		room.sendAnnouncement("[📄] Comandos : !me, !mostrarstats, !rangos, !juegos, !victorias, !goles, !asist, !cs, !discord.", player.id,0xFFFFFF,"bold");
+		room.sendAnnouncement("[🤑] 𝙲𝚘𝚖𝚊𝚗𝚍𝚘𝚜 𝚎𝚜𝚙𝚎𝚌𝚒𝚊𝚕𝚎𝚜 : !𝚝𝚞𝚕𝚊, !𝚌𝚛𝟽 <1-4>.", player.id,0xFF7900,"bold");
+		player.admin ? room.sendAnnouncement("[📄] Admin : !mute <duration = 3> #<id>, !unmute, !clearbans, !slow <duration>, !endslow.", player.id,0xFFFFFF,"bold") : null;
 	}
 	else if (["!afk"].includes(message[0].toLowerCase())) {
 		if (players.length != 1 && player.team != Team.SPECTATORS) {
@@ -920,37 +985,38 @@ room.onPlayerChat = function (player, message) {
 	else if (["!tula"].includes(message[0].toLowerCase())) {
         useTulaCommand(player);
 	}
-	else if (message[0].toLowerCase() === "!beso") {
-  if (message.length < 2) {
-    room.sendAnnouncement("𝙳𝚎𝚋𝚎𝚜 𝚎𝚜𝚙𝚎𝚌𝚒𝚏𝚒𝚌𝚊𝚛 𝚊 𝚚𝚞𝚒é𝚗 𝚎𝚗𝚟𝚒𝚊𝚛 𝚎𝚕 𝚋𝚎𝚜𝚘. 𝚄𝚜𝚊: !𝚋𝚎𝚜𝚘 @𝚞𝚜𝚞𝚊𝚛𝚒𝚘", player.id, 0xFC0882, "bold");
-    return false;
-  } else {
-    var targetPlayerName = message[1].slice(1); // Eliminar el símbolo @ del nombre del jugador objetivo
-    var besoMessages = [
-      " 👄 " + player.name + " 𝚝𝚎 𝚖𝚊𝚗𝚍ó 𝚞𝚗 𝚋𝚎𝚜𝚘 𝚌𝚘𝚗 𝚕𝚎𝚗𝚐𝚞𝚊! 😱👄",
-      " 👄 " + player.name + " 𝚝𝚎 𝚖𝚊𝚗𝚍ó 𝚞𝚗 𝚋𝚎𝚜𝚘 𝚊𝚙𝚊𝚜𝚒𝚘𝚗𝚊𝚍𝚘!! 👄",
-      " 👄 " + player.name + " 𝚝𝚎 𝚖𝚊𝚗𝚍ó 𝚞𝚗 𝚋𝚎𝚜𝚒𝚝𝚘 𝚎𝚗 𝚎𝚕 𝚌𝚞𝚕𝚒𝚝𝚘! 🍑👄"
-    ];
-    var randomIndex = Math.floor(Math.random() * besoMessages.length);
-    var selectedMessage = besoMessages[randomIndex];
-    var foundTargetPlayer = false;
-
-    for (var i = 0; i < room.getPlayerList().length; i++) {
-      var currentPlayer = room.getPlayerList()[i];
-      if (currentPlayer.name === targetPlayerName) {
-        room.sendChat(selectedMessage, currentPlayer.id, 0xFC0882, "bold");
-        foundTargetPlayer = true;
-        break;
+	else if (["!cr7"].includes(message[0].toLowerCase())) {
+      if (!room.getPlayerList().some(p => p.id === player.id)) {
+        room.sendAnnouncement("No puedes usar el comando si no estás jugando.", player.id, 0xFF7900, "bold");
+        return false;
       }
+      if (player.team === 0) {
+        room.sendAnnouncement("No puedes usar el comando si no estás en un equipo.", player.id, 0xFF7900, "bold");
+        return false;
+	  }
+      if (canUseCr7(player)) {
+        if (message.length >= 2 && !isNaN(Number(message[1]))) {
+            var phraseIndex = Number(message[1]) - 1;
+            if (phraseIndex >= 0 && phraseIndex < 4) {
+                var phrase = cr7Phrases[phraseIndex];
+                var announcement = player.name + " dijo: " + phrase;
+                room.sendAnnouncement(announcement, null, 0xF2F752, "bold");
+                cr7Cooldowns[player.id] = new Date().getTime();
+                return false;
+		    }
+        } else {
+            room.sendAnnouncement("Tienes que usar el comando seguido de un número del 1 al 4.", player.id, 0xFF7900, "bold");
+        }
+    } else {
+        var remainingTime = Math.ceil((cr7Cooldowns[player.id] + cr7Cooldown - new Date().getTime()) / 1000);
+        room.sendAnnouncement("¡Espera " + remainingTime + " segundos antes de usar el comando de nuevo!", player.id, 0xFF7900, "bold");
     }
-
-    if (!foundTargetPlayer) {
-      room.sendAnnouncement("𝙴𝚕 𝚓𝚞𝚐𝚊𝚍𝚘𝚛 𝚊𝚕 𝚚𝚞𝚎 𝚚𝚞𝚒𝚎𝚛𝚎𝚜 𝚋𝚎𝚜𝚊𝚛, 𝚗𝚘 𝚎𝚜𝚝𝚊!.", player.id, 0xFC0882, "bold");
+}
+	else if (["!discord"].includes(message[0].toLowerCase())) {
+      var discordLink = "https://discord.gg/gPhuf9CF";
+      room.sendAnnouncement("                                  ¡Únete a nuestro servidor de Discord!", null, 0xFFA200, "bold");
+      room.sendAnnouncement("                                  " + discordLink, null, 0xFFA200, "bold");
     }
-
-    return false;
-    }
-  } 
     else if (message[0].toLowerCase() === "!rangos") {
     const rangos = [
         { emoji: "🔥", nombre: "「𝐆𝐎𝐀𝐓」", nivel: "350 wins" },
@@ -1204,7 +1270,7 @@ room.onPlayerChat = function (player, message) {
             }
         } catch (error) {
             console.error("Error al procesar el comando !mute:", error);
-            room.sendAnnouncement("No puedes usar el comando !mute sin nada despues.", null, 0xFFA200, "bold");
+            room.sendAnnouncement("No puedes usar el comando !mute sin nada despues.", player.id, 0xFFA200, "bold");
         }
     }
 }
@@ -1302,7 +1368,7 @@ room.onPlayerChat = function (player, message) {
                 if (!Number.isNaN(Number.parseInt(message[1])) && room.getPlayer(Number.parseInt(message[1])) != null) {
                     var stats;
                     localStorage.getItem(getAuth(room.getPlayer(Number.parseInt(message[1])))) ? stats = JSON.parse(localStorage.getItem(getAuth(room.getPlayer(Number.parseInt(message[1]))))) : stats = [0, 0, 0, 0, "0.00", 0, 0, 0, 0, "0.00", "player", room.getPlayer(Number.parseInt(message[1])).name];
-                    if (stats[Ss.RL] == "player") {
+                    if (stats[Ss.RL] == "player" || stats[Ss.RL] == "vip") {
                         stats[Ss.RL] = "vip";
                         localStorage.setItem(getAuth(room.getPlayer(Number.parseInt(message[1]))), JSON.stringify(stats));
                         room.sendAnnouncement("[💎] " + room.getPlayer(Number.parseInt(message[1])).name + " 𝚊𝚑𝚘𝚛𝚊 𝚎𝚜 𝚓𝚞𝚐𝚊𝚍𝚘𝚛 𝚅𝚒𝚙 !", null, 0x00B4FF, "bold");
@@ -1321,7 +1387,10 @@ room.onPlayerChat = function (player, message) {
                     if (stats[Ss.RL] == "vip") {
                         room.sendAnnouncement("[👤] " + room.getPlayer(Number.parseInt(message[1])).name + " 𝚍𝚎𝚓𝚘 𝚍𝚎 𝚜𝚎𝚛 𝚅𝚒𝚙 !", null, 0x00B4FF, "bold");
                         stats[Ss.RL] = "player";
-                        localStorage.setItem(getAuth(room.getPlayer(Number.parseInt(message[1]))), JSON.stringify(stats));
+                        if (room.getPlayer(Number.parseInt(message[1])).auth === 2) {
+							room.setPlayerAdmin(Number.parseInt(message[1]), false);
+						}
+                        localStorage.setItem(getAuth(room.getPlayer(Number.parseInt(message[1]))), JSON.stringify(stats));	
                     }
                 }
             }
@@ -1661,6 +1730,10 @@ room.onStadiumChange = function(newStadiumName, byPlayer) {
 }
 
 room.onGameTick = function() {
+	    PublicitaDiscord();
+        PublicitaDonacion();
+        PublicitaHelp();
+        PublicitaLiga();
 	checkTime();
 	getLastTouchOfTheBall();
 	getStats();
