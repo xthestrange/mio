@@ -4,7 +4,7 @@
 
 /* ROOM */
 
-const roomName = "<𝙲𝙻>| 𝐆𝐨𝐝 𝐱𝟒 𝐋𝐞𝐚𝐠𝐮𝐞 |🙏🏆";
+const roomName = "🏆🙏| 𝐆𝐨𝐝 𝐱𝟒 𝐋𝐞𝐚𝐠𝐮𝐞 |🙏🏆";
 const botName = "🙏| 𝐆𝐨𝐝 |🙏";
 const maxPlayers = 25;
 const roomPublic = true;
@@ -855,6 +855,10 @@ room.onPlayerJoin = function(player) {
         stats = [0, 0, 0, 0, "0.00", 0, 0, 0, 0, "0.00", "player", player.name]
         localStorage.setItem(getAuth(player), JSON.stringify(stats));
     }
+	var welcomeMessage = localStorage.getItem(getAuth(player) + "-welcome");
+    if (welcomeMessage && playerData[Ss.RL] === "vip") {
+        room.sendAnnouncement("[💎] " + player.name + " " + welcomeMessage, null, 0x00B4FF, "bold");
+    }
 	
 }
 
@@ -926,7 +930,7 @@ room.onPlayerLeave = function(player) {
     updateRoleOnPlayerOut();
     if (room.getPlayerList().length == playersToSetPublic){
         room.setPassword();
-        room.sendChat("[✅] Host abierto al publico.",null);
+        room.sendAnnouncement("[✅] Host abierto al publico.", null, 0xFFA200, "bold");
     } 
 }
 
@@ -943,7 +947,10 @@ room.onPlayerChat = function (player, message) {
 	if (["!ayuda"].includes(message[0].toLowerCase())) {
 		room.sendAnnouncement("[📄] Comandos : !me, !mostrarstats, !rangos, !juegos, !victorias, !goles, !asist, !cs, !discord.", player.id,0xFFFFFF,"bold");
 		room.sendAnnouncement("[🤑] 𝙲𝚘𝚖𝚊𝚗𝚍𝚘𝚜 𝚎𝚜𝚙𝚎𝚌𝚒𝚊𝚕𝚎𝚜 : !𝚝𝚞𝚕𝚊, !𝚌𝚛𝟽 <1-4>.", player.id,0xFF7900,"bold");
-		player.admin ? room.sendAnnouncement("[📄] Admin : !mute <duration = 3> #<id>, !unmute, !clearbans, !slow <duration>, !endslow.", player.id,0xFFFFFF,"bold") : null;
+		if (localStorage.getItem(getAuth(player)) && JSON.parse(localStorage.getItem(getAuth(player)))[Ss.RL] === "vip") {
+            room.sendAnnouncement("[💎] Comandos exclusivos para VIP: !entrada <loquequieras> .", player.id, 0x00B4FF, "bold");
+        }
+		player.admin ? room.sendAnnouncement("[📄] Admin : !mute <duration = 3> #<id>, !unmute, !clearbans, !slow <duration>, !endslow, !verstats #<id>.", player.id,0xFFFFFF,"bold") : null;
 	}
 	else if (["!afk"].includes(message[0].toLowerCase())) {
 		if (players.length != 1 && player.team != Team.SPECTATORS) {
@@ -1012,6 +1019,19 @@ room.onPlayerChat = function (player, message) {
         room.sendAnnouncement("¡Espera " + remainingTime + " segundos antes de usar el comando de nuevo!", player.id, 0xFF7900, "bold");
     }
 }
+    else if (["!entrada"].includes(message[0].toLowerCase())) {
+    if (localStorage.getItem(getAuth(player)) && JSON.parse(localStorage.getItem(getAuth(player)))[Ss.RL] == "vip") {
+        if (message.length >= 2) {
+            var welcomeMessage = message.slice(1).join(" "); // Quitamos el espacio entre join()
+            localStorage.setItem(getAuth(player) + "-welcome", welcomeMessage);
+            room.sendAnnouncement("[✅] ¡Tu mensaje de bienvenida exclusivo esta listo,  " + player.name + "!", player.id, 0x00B4FF, "bold");
+        } else {
+            room.sendAnnouncement("Tienes que poner tu bienvenida aweonao.", player.id, 0x00B4FF, "bold");
+        }
+    } else {
+        room.sendAnnouncement("¡Este comando es exclusivo para jugadores VIP!", player.id, 0x00B4FF, "bold");
+    }
+}
 	else if (["!discord"].includes(message[0].toLowerCase())) {
       var discordLink = "https://discord.gg/gPhuf9CF";
       room.sendAnnouncement("                                  ¡Únete a nuestro servidor de Discord!", null, 0xFFA200, "bold");
@@ -1054,6 +1074,32 @@ room.onPlayerChat = function (player, message) {
            room.sendChat(`La contraseña de Admin ha sido cambiada.`);
        }
     }
+	else if (["!verstats"].includes(message[0].toLowerCase())) {
+    if (localStorage.getItem(getAuth(player)) && JSON.parse(localStorage.getItem(getAuth(player)))[Ss.RL] == "master") {
+        if (message.length >= 2 && message[1][0] == "#") {
+            var playerId = Number(message[1].substring(1));
+            var targetPlayer = room.getPlayer(playerId);
+            if (targetPlayer) {
+                var stats = localStorage.getItem(getAuth(targetPlayer));
+                if (stats) {
+                    stats = JSON.parse(stats);
+                    room.sendAnnouncement("[📄] Stats de " + targetPlayer.name + ": 🎮 Partidos Jugados: " + stats[Ss.GA] + ", ✅ Victorias: " + stats[Ss.WI] + ", ❌ Derrotas: " + stats[Ss.LS] + ", WR: " + stats[Ss.WR] + "%, ⚽️ Goles: " + stats[Ss.GL] + ", 👟 Asistencias: " + stats[Ss.AS] + ", 🤚 GK: " + stats[Ss.GK] + ", 🤚 Vallas: " + stats[Ss.CS] + ", 🤚 CS%: " + stats[Ss.CP] + "%", player.id, 0x73EC59, "bold");
+                    room.sendAnnouncement("[🤫]  𝘌𝘴𝘵𝘢𝘴 𝘴𝘰𝘯 𝘭𝘢𝘴 𝘴𝘵𝘢𝘵𝘴 𝘥𝘦 " + targetPlayer.name + " !",player.id,0xFF7900,"bold")
+					return false;
+                }
+            } else {
+                room.sendAnnouncement("No se encontró al jugador con el ID especificado.", player.id, 0xFF7900, "bold");
+                return false;
+            }
+        } else {
+            room.sendAnnouncement("Debes especificar el ID de un jugador usando el formato '#idjugador'.", player.id, 0xFF7900, "bold");
+            return false;
+        }
+    } else {
+        room.sendAnnouncement("Este comando solo puede ser utilizado por Masters.", player.id, 0xFF7900, "bold");
+        return false;
+    }
+}
 	else if (["!me"].includes(message[0].toLowerCase())) {
         var stats;
         localStorage.getItem(getAuth(player)) ? stats = JSON.parse(localStorage.getItem(getAuth(player))) : stats = [0, 0, 0, 0, "0.00", 0, 0, 0, 0, "0.00"];
@@ -1492,7 +1538,6 @@ room.onPlayerChat = function (player, message) {
 			}
 		}
 	}
-    console.log("auth: "+getAuth(player));
     if (localStorage.getItem(getAuth(player))){
         stats = JSON.parse(localStorage.getItem(getAuth(player)));
         var announcement = "";
@@ -1545,7 +1590,6 @@ room.onPlayerChat = function (player, message) {
             announcement += "「💎𝚅𝚒𝚙」";
             chatColor = "0x00B4FF";
         }
-		console.log("playerRole: " + playerRole);
         if (playerRole === "admin") {
             announcement += "「👨‍💼𝙰𝚍𝚖𝚒𝚗」";
             chatColor = "0x3BF5F5"; // Color para el rol de admin (turquesa)
@@ -1553,7 +1597,8 @@ room.onPlayerChat = function (player, message) {
                    announcement += "「👑𝙼𝚊𝚜𝚝𝚎𝚛」";
                    chatColor = "0xFFFF00"; // Color para el rol de master (amarillo)
         }
-        announcement += player.name + ": " + originalMessage;
+        console.log(announcement + " " + player.name + ": " + originalMessage)
+		announcement += player.name + ": " + originalMessage;
         room.sendAnnouncement(announcement, null, chatColor);
         return false;   
     }   
@@ -1576,6 +1621,14 @@ room.onPlayerBallKick = function(player) {
 
 room.onGameStart = function(byPlayer) {
 	game = new Game(Date.now(), room.getScores(), []);
+	isTimeAddedShown = false;
+    isTimeAddedShowndos = false;
+    isTimeAddedShowntres = false;
+    isTimeAddedShowncuatro = false;
+    isTimeAddedShowncinco = false;
+    isTimeAddedShownseis = false;
+    isTimeAddedShownquince = false;
+    isTimeAddedShownsiete = false;
 	countAFK = true;
 	activePlay = false;
 	goldenGoal = false;
