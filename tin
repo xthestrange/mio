@@ -7,7 +7,7 @@
 const roomName = "🟢 | Futsal x4 TinoTino | 🔴";
 const botName = "𝐁𝐨𝐭 𝐏𝐚𝐥𝐞𝐬𝐭𝐢𝐧𝐨 𝐓𝐓𝐋";
 const maxPlayers = 25;
-const roomPublic = false;
+const roomPublic = true;
 const geo = [{"code": "ps", "lat": -33.456, "lon": -70.648}];
 
 const room = HBInit({ roomName: roomName, maxPlayers: maxPlayers, public: roomPublic, playerName: botName, geo: geo[0] });
@@ -16,6 +16,9 @@ const scoreLimitClassic = 3;
 const scoreLimitBig = 3;
 const timeLimitClassic = 3;
 const timeLimitBig = 4;
+
+const Uniform = { COUNTRY: 0, CLUBLA: 1 };
+var announcementColor = 0x0EA157;
 
 var isTimeAddedShown = false;
 var isTimeAddedShowndos = false;
@@ -39,14 +42,117 @@ var aloneMap = '{"name":"Futsal No Goals TTL","width":420,"height":200,"spawnDis
 var classicMap = '{"name":"Futsal x1 and x2 by TTL! & GLH","width":420,"height":200,"spawnDistance":180,"bg":{"type":"hockey","width":368,"height":171,"kickOffRadius":65,"cornerRadius":0},"vertexes":[{"x":-368,"y":171,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":-368,"y":65,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":-368,"y":-65,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":-368,"y":-171,"trait":"ballArea","bCoef":1,"cMask":["ball"]},{"x":368,"y":171,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":368,"y":65,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":368,"y":-65,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":368,"y":-171,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":0,"y":65,"trait":"kickOffBarrier"},{"x":0,"y":-65,"trait":"line"},{"bCoef":1,"trait":"ballArea","x":368,"y":171},{"bCoef":1,"trait":"ballArea","x":368,"y":-171},{"bCoef":0,"trait":"line","x":0,"y":171},{"bCoef":0,"trait":"line","x":0,"y":-171},{"x":0,"y":65,"trait":"kickOffBarrier"},{"x":0,"y":-65,"trait":"kickOffBarrier"},{"x":377,"y":-65,"trait":"line","cMask":["ball"],"bCoef":1},{"x":377,"y":-171,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":-377,"y":-65,"trait":"line","cMask":["ball"],"bCoef":1},{"x":-377,"y":-171,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":-377,"y":65,"trait":"line","cMask":["ball"],"bCoef":1},{"x":-377,"y":171,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":377,"y":65,"trait":"line","cMask":["ball"],"bCoef":1},{"x":377,"y":171,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":0,"y":199,"trait":"kickOffBarrier"},{"x":0,"y":65,"trait":"kickOffBarrier"},{"x":0,"y":-65,"trait":"kickOffBarrier"},{"x":0,"y":-199,"trait":"kickOffBarrier"},{"x":-368.53340356886,"y":-62.053454903872,"cMask":["red","blue","ball"],"trait":"goalNet","curve":0,"color":"F8F8F8","pos":[-700,-80]},{"x":-400.05760771891,"y":-62.053454903872,"cMask":["red","blue","ball"],"trait":"goalNet","curve":0,"color":"F8F8F8","pos":[-700,-80]},{"x":-400.05760771891,"y":64.043361696331,"cMask":["red","blue","ball"],"trait":"goalNet","curve":0,"color":"F8F8F8","pos":[-700,80]},{"x":-368.53340356886,"y":64.043361696331,"cMask":["red","blue","ball"],"trait":"goalNet","curve":0,"color":"F8F8F8","pos":[-700,80]},{"x":368.09926357786,"y":63.94882446641,"cMask":["red","blue","ball"],"trait":"goalNet","curve":0,"color":"F8F8F8","pos":[-700,-80]},{"x":400,"y":64,"cMask":["red","blue","ball"],"trait":"goalNet","curve":0,"color":"F8F8F8","pos":[-700,-80]},{"x":400,"y":-61.927767991658,"cMask":["red","blue","ball"],"trait":"goalNet","curve":0,"color":"F8F8F8","pos":[-700,80]},{"x":368.9681846993,"y":-62.144998272018,"cMask":["red","blue","ball"],"trait":"goalNet","curve":0,"color":"F8F8F8","pos":[-700,80]},{"x":-368,"y":-142.37229643041,"bCoef":0.1,"trait":"line","color":"F8F8F8","curve":-90},{"x":-260.90035258157,"y":-50.168480548544,"bCoef":0.1,"trait":"line","color":"F8F8F8","curve":0},{"x":-368,"y":-160.81305960678,"bCoef":0.1,"trait":"line","curve":-90},{"x":-358.5379338963,"y":-171,"bCoef":0.1,"trait":"line","curve":-90},{"x":-368,"y":141.33175243687,"bCoef":0.1,"trait":"line","color":"F8F8F8","curve":90},{"x":-260.90035258157,"y":49.127936555002,"bCoef":0.1,"trait":"line","color":"F8F8F8","curve":0},{"x":-368,"y":159.77251561324,"bCoef":0.1,"trait":"line","curve":90},{"x":-358.5379338963,"y":171,"bCoef":0.1,"trait":"line","curve":90},{"x":368,"y":159.77251561324,"bCoef":0.1,"trait":"line","curve":-90},{"x":358.36266315432,"y":171,"bCoef":0.1,"trait":"line","curve":-90},{"x":368,"y":-160.81305960678,"bCoef":0.1,"trait":"line","curve":90},{"x":358.36266315432,"y":-171,"bCoef":0.1,"trait":"line","curve":90},{"x":368,"y":-142.37229643041,"bCoef":0.1,"trait":"line","color":"F8F8F8","curve":90},{"x":260.72508183959,"y":-50.168480548544,"bCoef":0.1,"trait":"line","color":"F8F8F8","curve":90},{"x":368,"y":141.33175243687,"bCoef":0.1,"trait":"line","color":"F8F8F8","curve":-90},{"x":260.72508183959,"y":49.127936555002,"bCoef":0.1,"trait":"line","color":"F8F8F8","curve":-90},{"x":260.72508183959,"y":-50.168480548544,"bCoef":0.1,"trait":"line","color":"F8F8F8","curve":0},{"x":260.72508183959,"y":49.127936555002,"bCoef":0.1,"trait":"line","color":"F8F8F8","curve":0},{"x":-250.86909422732,"y":-1.2295321189394,"bCoef":0.1,"trait":"line","curve":180},{"x":-250.86909422732,"y":0.18898812539692,"bCoef":0.1,"trait":"line","curve":180},{"x":-250.86909422732,"y":-2.6480523632758,"bCoef":0.1,"trait":"line","curve":180},{"x":-250.86909422732,"y":1.6075083697333,"bCoef":0.1,"trait":"line","curve":180},{"x":-250.86909422732,"y":0.89824824756514,"bCoef":0.1,"trait":"line","curve":180},{"x":-250.86909422732,"y":-1.9387922411076,"bCoef":0.1,"trait":"line","curve":180},{"x":-250.86909422732,"y":1.9621384308174,"bCoef":0.1,"trait":"line","curve":180},{"x":-250.86909422732,"y":-3.0026824243599,"bCoef":0.1,"trait":"line","curve":180},{"x":250.69382348534,"y":-1.2295321189394,"bCoef":0.1,"trait":"line","curve":180},{"x":250.69382348534,"y":0.18898812539692,"bCoef":0.1,"trait":"line","curve":180},{"x":250.69382348534,"y":-2.6480523632758,"bCoef":0.1,"trait":"line","curve":180},{"x":250.69382348534,"y":1.6075083697333,"bCoef":0.1,"trait":"line","curve":180},{"x":250.69382348534,"y":0.89824824756514,"bCoef":0.1,"trait":"line","curve":180},{"x":250.69382348534,"y":-1.9387922411076,"bCoef":0.1,"trait":"line","curve":180},{"x":250.69382348534,"y":1.9621384308174,"bCoef":0.1,"trait":"line","curve":180},{"x":250.69382348534,"y":-3.0026824243599,"bCoef":0.1,"trait":"line","curve":180},{"x":-185.66591492467,"y":-1.2295321189394,"bCoef":0.1,"trait":"line","curve":180},{"x":-185.66591492467,"y":0.18898812539692,"bCoef":0.1,"trait":"line","curve":180},{"x":-185.66591492467,"y":-2.6480523632758,"bCoef":0.1,"trait":"line","curve":180},{"x":-185.66591492467,"y":1.6075083697333,"bCoef":0.1,"trait":"line","curve":180},{"x":-185.66591492467,"y":0.89824824756514,"bCoef":0.1,"trait":"line","curve":180},{"x":-185.66591492467,"y":-1.9387922411076,"bCoef":0.1,"trait":"line","curve":180},{"x":-185.66591492467,"y":1.9621384308174,"bCoef":0.1,"trait":"line","curve":180},{"x":-185.66591492467,"y":-3.0026824243599,"bCoef":0.1,"trait":"line","curve":180},{"x":185.49064418269,"y":-1.2295321189394,"bCoef":0.1,"trait":"line","curve":180},{"x":185.49064418269,"y":0.18898812539692,"bCoef":0.1,"trait":"line","curve":180},{"x":185.49064418269,"y":-2.6480523632758,"bCoef":0.1,"trait":"line","curve":180},{"x":185.49064418269,"y":1.6075083697333,"bCoef":0.1,"trait":"line","curve":180},{"x":185.49064418269,"y":0.89824824756514,"bCoef":0.1,"trait":"line","curve":180},{"x":185.49064418269,"y":-1.9387922411076,"bCoef":0.1,"trait":"line","curve":180},{"x":185.49064418269,"y":1.9621384308174,"bCoef":0.1,"trait":"line","curve":180},{"x":185.49064418269,"y":-3.0026824243599,"bCoef":0.1,"trait":"line","curve":180},{"x":-160.58776903904,"y":-159.39453936245,"bCoef":0.1,"trait":"line"},{"x":-160.58776903904,"y":-182.09086327183,"bCoef":0.1,"trait":"line"},{"x":-80.337702205015,"y":-159.39453936245,"bCoef":0.1,"trait":"line"},{"x":-80.337702205015,"y":-182.09086327183,"bCoef":0.1,"trait":"line"},{"x":160.41249829706,"y":-159.39453936245,"bCoef":0.1,"trait":"line"},{"x":160.41249829706,"y":-182.09086327183,"bCoef":0.1,"trait":"line"},{"x":80.162431463036,"y":-159.39453936245,"bCoef":0.1,"trait":"line"},{"x":80.162431463036,"y":-182.09086327183,"bCoef":0.1,"trait":"line"},{"x":-254.88159756902,"y":-171,"bCoef":0.1,"trait":"line"},{"x":-254.88159756902,"y":-182.09086327183,"bCoef":0.1,"trait":"line"},{"x":-371.91294503531,"y":-87.759267023458,"bCoef":0.1,"trait":"line"},{"x":-384.61920561736,"y":-87.759267023458,"bCoef":0.1,"trait":"line"},{"x":371.73767429333,"y":-87.759267023458,"bCoef":0.1,"trait":"line"},{"x":384.44393487538,"y":-87.759267023458,"bCoef":0.1,"trait":"line"},{"x":-371.91294503531,"y":86.718723029916,"bCoef":0.1,"trait":"line"},{"x":-384.61920561736,"y":86.718723029916,"bCoef":0.1,"trait":"line"},{"x":371.73767429333,"y":86.718723029916,"bCoef":0.1,"trait":"line"},{"x":384.44393487538,"y":86.718723029916,"bCoef":0.1,"trait":"line"},{"x":-254.88159756902,"y":171,"bCoef":0.1,"trait":"line"},{"x":-254.88159756902,"y":181.05031927829,"bCoef":0.1,"trait":"line"},{"x":254.70632682704,"y":-171,"bCoef":0.1,"trait":"line"},{"x":254.70632682704,"y":-182.09086327183,"bCoef":0.1,"trait":"line"},{"x":254.70632682704,"y":171,"bCoef":0.1,"trait":"line"},{"x":254.70632682704,"y":181.05031927829,"bCoef":0.1,"trait":"line"},{"x":377,"y":-65,"trait":"line","cMask":["ball"],"bCoef":1},{"x":377,"y":-171,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":-377,"y":-65,"trait":"line","cMask":["ball"],"bCoef":1},{"x":-377,"y":-171,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":-377,"y":65,"trait":"line","cMask":["ball"],"bCoef":1},{"x":-377,"y":171,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":377,"y":65,"trait":"line","cMask":["ball"],"bCoef":1},{"x":377,"y":171,"trait":"ballArea","cMask":["ball"],"bCoef":1},{"x":371,"y":-65,"trait":"ballArea","cMask":["ball"],"bCoef":0},{"x":371,"y":-171,"trait":"ballArea","cMask":["ball"],"bCoef":0},{"x":371,"y":65,"trait":"ballArea","cMask":["ball"],"bCoef":0},{"x":371,"y":171,"trait":"ballArea","cMask":["ball"],"bCoef":0},{"x":-371,"y":65,"trait":"ballArea","cMask":["ball"],"bCoef":0},{"x":-371,"y":171,"trait":"ballArea","cMask":["ball"],"bCoef":0},{"x":-371,"y":-65,"trait":"ballArea","cMask":["ball"],"bCoef":0},{"x":-371,"y":-171,"trait":"ballArea","cMask":["ball"],"bCoef":0}],"segments":[{"v0":0,"v1":1,"trait":"ballArea"},{"v0":2,"v1":3,"trait":"ballArea"},{"v0":4,"v1":5,"trait":"ballArea"},{"v0":6,"v1":7,"trait":"ballArea"},{"v0":8,"v1":9,"trait":"kickOffBarrier","curve":180,"cGroup":["blueKO"]},{"v0":8,"v1":9,"trait":"kickOffBarrier","curve":-180,"cGroup":["redKO"]},{"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":1,"v1":0,"cMask":["ball"],"x":-368},{"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":5,"v1":4,"cMask":["ball"],"x":368},{"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":2,"v1":3,"cMask":["ball"],"x":-368},{"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":6,"v1":7,"cMask":["ball"],"x":368},{"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":0,"v1":10,"y":171},{"vis":true,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":3,"v1":11,"y":-171},{"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","v0":12,"v1":13},{"curve":-180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","v0":9,"v1":8},{"curve":180,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","v0":15,"v1":14},{"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","v0":2,"v1":1},{"curve":0,"vis":true,"color":"FFFFFF","bCoef":0,"trait":"line","v0":6,"v1":5},{"vis":false,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":16,"v1":17,"cMask":["ball"],"x":330},{"vis":false,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":18,"v1":19,"cMask":["ball"],"x":-330},{"vis":false,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":20,"v1":21,"cMask":["ball"],"x":-330},{"vis":false,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":22,"v1":23,"cMask":["ball"],"x":330},{"v0":24,"v1":25,"trait":"kickOffBarrier"},{"v0":26,"v1":27,"trait":"kickOffBarrier"},{"v0":28,"v1":29,"curve":0,"color":"F8F8F8","cMask":["red","blue","ball"],"trait":"goalNet","pos":[-700,-80],"y":-80},{"v0":29,"v1":30,"color":"F8F8F8","cMask":["red","blue","ball"],"trait":"goalNet","x":-590},{"v0":30,"v1":31,"curve":0,"color":"F8F8F8","cMask":["red","blue","ball"],"trait":"goalNet","pos":[-700,80],"y":80},{"v0":32,"v1":33,"curve":0,"color":"F8F8F8","cMask":["red","blue","ball"],"trait":"goalNet","pos":[-700,-80],"y":-80},{"v0":33,"v1":34,"color":"F8F8F8","cMask":["red","blue","ball"],"trait":"goalNet","x":-590},{"v0":34,"v1":35,"curve":0,"color":"F8F8F8","cMask":["red","blue","ball"],"trait":"goalNet","pos":[-700,80],"y":80},{"v0":36,"v1":37,"curve":94.0263701017,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line"},{"v0":39,"v1":38,"curve":86.632306418889,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line"},{"v0":40,"v1":41,"curve":-94.026370101699,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line"},{"v0":37,"v1":41,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line"},{"v0":43,"v1":42,"curve":-86.632306418888,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line"},{"v0":45,"v1":44,"curve":86.632306418884,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line"},{"v0":47,"v1":46,"curve":-86.632306418899,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line"},{"v0":48,"v1":49,"curve":-94.026370101699,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line"},{"v0":50,"v1":51,"curve":94.026370101699,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line"},{"v0":52,"v1":53,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":390},{"v0":55,"v1":54,"curve":-180.00692920292,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-375},{"v0":54,"v1":55,"curve":-180.00218240614,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-375},{"v0":57,"v1":56,"curve":-179.64823645332,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-375},{"v0":56,"v1":57,"curve":-180.35758668147,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-375},{"v0":59,"v1":58,"curve":-180.02357323962,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-375},{"v0":58,"v1":59,"curve":-180.00924102399,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-375},{"v0":61,"v1":60,"curve":-180.06885755885,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-375},{"v0":60,"v1":61,"curve":-180.02948353257,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-375},{"v0":63,"v1":62,"curve":-179.99869069543,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":375},{"v0":62,"v1":63,"curve":-179.99939258776,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":375},{"v0":65,"v1":64,"curve":-180.08826047163,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":375},{"v0":64,"v1":65,"curve":-179.91186753664,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":375},{"v0":67,"v1":66,"curve":-179.99528711105,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":375},{"v0":66,"v1":67,"curve":-179.99743836358,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":375},{"v0":69,"v1":68,"curve":-179.98626041101,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":375},{"v0":68,"v1":69,"curve":-179.99175181595,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":375},{"v0":71,"v1":70,"curve":-180.04715562398,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-277.5},{"v0":70,"v1":71,"curve":-179.95294709391,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-277.5},{"v0":73,"v1":72,"curve":-179.95715750564,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-277.5},{"v0":72,"v1":73,"curve":-179.89943871875,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-277.5},{"v0":75,"v1":74,"curve":-179.94773754738,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-277.5},{"v0":74,"v1":75,"curve":-179.98221351296,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-277.5},{"v0":77,"v1":76,"curve":-180.4151727218,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-277.5},{"v0":76,"v1":77,"curve":-179.58764458796,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-277.5},{"v0":79,"v1":78,"curve":-180.00086646359,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":277.5},{"v0":78,"v1":79,"curve":-180.01965986376,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":277.5},{"v0":81,"v1":80,"curve":-180.03532601389,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":277.5},{"v0":80,"v1":81,"curve":-179.99380079,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":277.5},{"v0":83,"v1":82,"curve":-180.0044468452,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":277.5},{"v0":82,"v1":83,"curve":-180.01386779847,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":277.5},{"v0":85,"v1":84,"curve":-180.05158287563,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":277.5},{"v0":84,"v1":85,"curve":-180.01212223878,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":277.5},{"v0":86,"v1":87,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-240},{"v0":88,"v1":89,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-120},{"v0":90,"v1":91,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":240},{"v0":92,"v1":93,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":120},{"v0":94,"v1":95,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-381},{"v0":96,"v1":97,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-240,"y":123},{"v0":98,"v1":99,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-240,"y":123},{"v0":100,"v1":101,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-240,"y":-123},{"v0":102,"v1":103,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-240,"y":-123},{"v0":104,"v1":105,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":-381},{"v0":106,"v1":107,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":381},{"v0":108,"v1":109,"curve":0,"vis":true,"color":"F8F8F8","bCoef":0.1,"trait":"line","x":381},{"vis":false,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":110,"v1":111,"cMask":["ball"],"x":330},{"vis":false,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":112,"v1":113,"cMask":["ball"],"x":-330},{"vis":false,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":114,"v1":115,"cMask":["ball"],"x":-330},{"vis":false,"color":"FFFFFF","bCoef":1,"trait":"ballArea","v0":116,"v1":117,"cMask":["ball"],"x":330},{"vis":false,"color":"FFFFFF","bCoef":0,"trait":"ballArea","v0":118,"v1":119,"cMask":["ball"],"x":371},{"vis":false,"color":"FFFFFF","bCoef":0,"trait":"ballArea","v0":120,"v1":121,"cMask":["ball"],"x":371},{"vis":false,"color":"FFFFFF","bCoef":0,"trait":"ballArea","v0":122,"v1":123,"cMask":["ball"],"x":-371},{"vis":false,"color":"FFFFFF","bCoef":0,"trait":"ballArea","v0":124,"v1":125,"cMask":["ball"],"x":-371}],"goals":[{"p0":[-374.25,-62.053454903872],"p1":[-374.25,64.043361696331],"team":"red"},{"p0":[374.25,62],"p1":[374.25,-62],"team":"blue"}],"discs":[{"radius":3.9405255187564,"pos":[-368.53340356886,64.043361696331],"color":"6666CC","trait":"goalPost","y":80},{"radius":3.9405255187564,"pos":[-368.53340356886,-62.053454903872],"color":"6666CC","trait":"goalPost","y":-80,"x":-560},{"radius":3.9405255187564,"pos":[368.9681846993,-62.144998272018],"color":"6666CC","trait":"goalPost","y":80},{"radius":3.9405255187564,"pos":[368.09926357786,63.94882446641],"color":"6666CC","trait":"goalPost","y":-80,"x":-560},{"radius":3,"invMass":0,"pos":[-368,-171],"color":"FFCC00","bCoef":0.1,"trait":"line"},{"radius":3,"invMass":0,"pos":[-368,171],"color":"FFCC00","bCoef":0.1,"trait":"line"},{"radius":3,"invMass":0,"pos":[368,171],"color":"FFCC00","bCoef":0.1,"trait":"line"},{"radius":3,"invMass":0,"pos":[368,-171],"color":"FFCC00","bCoef":0.1,"trait":"line"}],"planes":[{"normal":[0,1],"dist":-171,"trait":"ballArea"},{"normal":[0,-1],"dist":-171,"trait":"ballArea"},{"normal":[0,1],"dist":-200,"bCoef":0.2,"cMask":["all"]},{"normal":[0,-1],"dist":-200,"bCoef":0.2,"cMask":["all"]},{"normal":[1,0],"dist":-420,"bCoef":0.2,"cMask":["all"]},{"normal":[-1,0],"dist":-420,"bCoef":0.2,"cMask":["all"]}],"traits":{"ballArea":{"vis":false,"bCoef":1,"cMask":["ball"]},"goalPost":{"radius":8,"invMass":0,"bCoef":1},"goalNet":{"vis":true,"bCoef":0.1,"cMask":["all"]},"kickOffBarrier":{"vis":false,"bCoef":0.1,"cGroup":["redKO","blueKO"],"cMask":["red","blue"]},"line":{"vis":true,"bCoef":0,"cMask":[""]},"arco":{"radius":2,"cMask":["n\/d"],"color":"cccccc"}},"playerPhysics":{"acceleration":0.11,"kickingAcceleration":0.083,"kickStrength":5,"bCoef":0},"ballPhysics":{"radius":6.25,"color":"FFCC00","bCoef":0.4,"invMass":1.5,"damping":0.99}}'; // Insert your map for 1v1 and 2v2 here. To get minimum file size, here are the instructions : 1. Download the map 2. Go to https://cssminifier.com 3. Paste the result
 var bigMap = '{"name": "Futsal x4 by TTL", "canBeStored": true, "width": 765, "height": 350, "bg": { "type": "hockey", "height": 0, "width": 0, "cornerRadius": 0, "kickOffRadius": 0 }, "vertexes": [ { "x": 0, "y": -350, "bCoef": 0, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ] }, { "x": 0, "y": -320, "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ] }, { "x": -700, "y": -90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ -700, -80 ] }, { "x": -735, "y": -90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ -700, -80 ] }, { "x": -735, "y": 90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ -700, 80 ] }, { "x": -700, "y": 90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ -700, 80 ] }, { "x": 700, "y": -90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ 700, -90 ] }, { "x": 735, "y": -90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ 700, -90 ] }, { "x": 735, "y": 90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ 700, 80 ] }, { "x": 700, "y": 90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ 700, 80 ] }, { "x": -700, "y": 90, "bCoef": 1.15, "cMask": [ "ball" ], "trait": "ballArea", "color": "FFFFFF", "pos": [ -700, 80 ] }, { "x": -700, "y": 320, "bCoef": 1.15, "cMask": [ "ball" ], "trait": "ballArea", "color": "FFFFFF" }, { "x": -700, "y": -90, "bCoef": 1.15, "cMask": [ "ball" ], "trait": "ballArea", "color": "FFFFFF", "pos": [ -700, -80 ] }, { "x": -700, "y": -320, "bCoef": 1.15, "cMask": [ "ball" ], "trait": "ballArea", "color": "FFFFFF" }, { "x": -700, "y": 320, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "color": "ffffff" }, { "x": 700, "y": 320, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "color": "ffffff" }, { "x": 700, "y": 90, "bCoef": 1.15, "cMask": [ "ball" ], "trait": "ballArea", "pos": [ 700, 80 ], "color": "ffffff" }, { "x": 700, "y": 320, "bCoef": 1.15, "cMask": [ "ball" ], "trait": "ballArea", "color": "ffffff" }, { "x": 700, "y": -320, "bCoef": 1.15, "cMask": [ "ball" ], "trait": "ballArea", "color": "ffffff" }, { "x": 700, "y": -90, "bCoef": 1.15, "cMask": [ "ball" ], "trait": "ballArea", "color": "ffffff", "pos": [ 700, -90 ] }, { "x": -700, "y": -320, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "curve": 0, "color": "ffffff" }, { "x": 700, "y": -320, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "curve": 0, "color": "ffffff" }, { "x": -706.5, "y": 90, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "curve": 0, "vis": false, "pos": [ -700, 80 ], "color": "ffffff" }, { "x": -706.5, "y": 320, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "curve": 0, "vis": false, "color": "ffffff" }, { "x": -706.5, "y": -320, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "vis": false, "curve": 0, "color": "ffffff" }, { "x": -706.5, "y": -90, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "vis": false, "curve": 0, "pos": [ -700, -80 ], "color": "ffffff" }, { "x": 706.5, "y": -320, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "vis": false, "curve": 0, "color": "ffffff" }, { "x": 706.5, "y": -90, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "vis": false, "curve": 0, "pos": [ 700, -90 ], "color": "ffffff" }, { "x": 706.5, "y": 90, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "curve": 0, "vis": false, "pos": [ 700, 80 ], "color": "ffffff" }, { "x": 706.5, "y": 320, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "curve": 0, "vis": false, "color": "ffffff" }, { "x": -700, "y": -90, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "861A1A" }, { "x": -700, "y": 90, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "861A1A" }, { "x": 700, "y": -90, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "1F6518", "pos": [ 700, -90 ] }, { "x": 700, "y": 90, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "1F6518" }, { "x": -700, "y": 280, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FF0000", "curve": -93.241608812827 }, { "x": -480, "y": 60, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FF0000", "curve": -93.241608812827 }, { "x": -700, "y": -280, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FF0000", "curve": 93.241608812827 }, { "x": -480, "y": -60, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FF0000", "curve": 93.241608812827 }, { "x": 700, "y": 280, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00", "curve": 93.241608812827 }, { "x": 480, "y": 70, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00", "curve": 93.241608812827 }, { "x": 700, "y": -280, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00", "curve": -93.241608812827 }, { "x": 480, "y": -70, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00", "curve": -93.241608812827 }, { "x": 480, "y": 70, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00", "curve": 0 }, { "x": 480, "y": -70, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00", "curve": 0 }, { "x": 480, "y": 1, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "curve": 180, "color": "ffffff" }, { "x": 480, "y": -1, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "curve": 180, "color": "ffffff" }, { "x": 480, "y": 3, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "curve": 180, "color": "ffffff" }, { "x": 480, "y": -3, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "curve": 180, "color": "ffffff" }, { "x": 480, "y": 2, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "curve": 180, "color": "ffffff" }, { "x": -480, "y": 1, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "curve": 180, "color": "ffffff" }, { "x": -480, "y": -1, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "curve": 180, "color": "ffffff" }, { "x": -480, "y": 3, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "curve": 180, "color": "ffffff" }, { "x": -480, "y": -3, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "curve": 180, "color": "ffffff" }, { "x": -480, "y": 2, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "curve": 180, "color": "ffffff" }, { "x": -700, "y": -90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ -700, -80 ], "vis": false }, { "x": -735, "y": -90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ -700, -80 ], "vis": false }, { "x": -735, "y": 90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ -700, 80 ], "vis": false }, { "x": -700, "y": 90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ -700, 80 ], "vis": false }, { "x": 700, "y": -90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ 700, -90 ], "vis": false }, { "x": 735, "y": -90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ 700, -90 ], "vis": false }, { "x": 735, "y": 90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ 700, 80 ], "vis": false }, { "x": 700, "y": 90, "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "curve": 0, "color": "ffffff", "pos": [ 700, 80 ], "vis": false }, { "x": 0, "y": 320, "bCoef": 0, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ] }, { "x": 0, "y": 350, "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ] }, { "x": 0, "y": 90, "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ], "color": "696969" }, { "x": 0, "y": -90, "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ], "color": "696969" }, { "x": 0, "y": 90, "bCoef": 0, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ], "color": "696969" }, { "x": 0, "y": -90, "bCoef": 0, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ], "color": "696969" }, { "x": 0, "y": -320, "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ], "color": "ffffff" }, { "x": 0, "y": 90, "cMask": [], "color": "ffffff" }, { "x": 0, "y": 90, "bCoef": 0, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ], "color": "ffffff" }, { "x": 0, "y": 320, "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ], "color": "ffffff" }, { "x": 0, "y": 90, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "B6B6B8", "curve": -180 }, { "x": 0, "y": -90, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "B6B6B8", "curve": -180 }, { "x": 0, "y": 90, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "B6B6B8", "curve": 180 }, { "x": 0, "y": -90, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "B6B6B8", "curve": 180 }, { "x": 0, "y": 91, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF", "curve": -180 }, { "x": 0, "y": -91, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF", "curve": -180 }, { "x": 0, "y": 91, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF", "curve": 180 }, { "x": 0, "y": -91, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF", "curve": 180 }, { "x": 0, "y": -91, "bCoef": 0, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ], "color": "FFFFFF" }, { "x": 0, "y": -320, "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ], "color": "FFFFFF" }, { "x": 0, "y": 91, "bCoef": 0, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ], "color": "FFFFFF" }, { "x": 0, "y": 320, "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ], "color": "FFFFFF" }, { "x": -706.5, "y": 90, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "curve": 0, "vis": false, "pos": [ -700, 80 ], "color": "ffffff" }, { "x": -706.5, "y": 320, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "curve": 0, "vis": false, "color": "ffffff" }, { "x": -706.5, "y": -320, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "vis": false, "curve": 0, "color": "ffffff" }, { "x": -706.5, "y": -90, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "vis": false, "curve": 0, "pos": [ -700, -80 ], "color": "ffffff" }, { "x": 706.5, "y": -320, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "vis": false, "curve": 0, "color": "ffffff" }, { "x": 706.5, "y": -90, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "vis": false, "curve": 0, "pos": [ 700, -90 ], "color": "ffffff" }, { "x": 706.5, "y": 90, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "curve": 0, "vis": false, "pos": [ 700, 80 ], "color": "ffffff" }, { "x": 706.5, "y": 320, "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "curve": 0, "vis": false, "color": "ffffff" }, { "x": 735, "y": -350, "bCoef": 0.5, "cMask": [ "red", "blue" ] }, { "x": 23.14814814814815, "y": 65.15775034293553, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 51.0108518762236, "y": -33.5069856170176, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 0, "y": 65.15775034293553, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00" }, { "x": -9.43072702331962, "y": -36.865569272976686, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00" }, { "x": -22.36405890093552, "y": 57.02620808175814, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "000000" }, { "x": -53.31417512834757, "y": -26.258920810066996, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "000000" }, { "x": -78.01783264746228, "y": 16.289437585733886, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": -38.58024691358025, "y": -60.871056241426615, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": 11.145404663923179, "y": 14.574759945130321, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00" }, { "x": 34.293552812071326, "y": -66.01508916323732, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 77.1604938271605, "y": 8.573388203017833, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": -78.01783264746228, "y": 16.289437585733886, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": -38.58024691358025, "y": -60.871056241426615, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": -24.691562776381716, "y": 60.50671283675965, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": -57.441700960219485, "y": -28.360768175583004, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": -53.20236895695609, "y": -24.13898455695717, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "000000" }, { "x": -34.421488541539844, "y": -60.27628069622814, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "000000" }, { "x": -12.860082304526749, "y": -35.15089163237311, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": -2.572016460905349, "y": 66.8724279835391, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": -78.01783264746228, "y": 16.289437585733886, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": -38.58024691358025, "y": -60.871056241426615, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": 0, "y": 65.15775034293553, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00" }, { "x": -9.43072702331962, "y": -36.865569272976686, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00" }, { "x": 20.576131687242796, "y": 61.72839506172839, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 50.582990397805204, "y": -36.008230452674894, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 31.354609448649985, "y": -66.0150891632373, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 51.44032921810698, "y": -30.006858710562405, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 23.14814814814815, "y": 65.15775034293553, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 52.84536488848808, "y": -33.67426887162636, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 34.293552812071326, "y": -66.01508916323732, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 77.1604938271605, "y": 8.573388203017833, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": -78.01783264746228, "y": 16.289437585733886, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": -38.58024691358025, "y": -60.871056241426615, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": 8.455783426570392, "y": 14.831138357785708, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": -0.3669269025159906, "y": 50.70177122201712, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 0, "y": 65.15775034293553, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00" }, { "x": 11.145404663923179, "y": 14.574759945130321, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00" }, { "x": 0, "y": 65.15775034293553, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00" }, { "x": -9.43072702331962, "y": -36.865569272976686, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "17FF00" }, { "x": -32.400000000000006, "y": -70.2, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 28.080000000000002, "y": -72.36000000000001, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": -20.520000000000003, "y": 71.28, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 21.6, "y": 73.44000000000001, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 51.411166427616855, "y": -31.505885813711753, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "vis": true }, { "x": 74.26762464619144, "y": 8.980283896304227, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "vis": true }, { "x": 23.14814814814815, "y": 65.15775034293553, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 52.42595615444508, "y": -32.67617213240567, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 34.293552812071326, "y": -66.01508916323732, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": 77.1604938271605, "y": 8.573388203017833, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "x": -73.73258656803115, "y": 15.840912896189035, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "000000" }, { "x": -54.95170615261491, "y": -20.296383243081937, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "000000" }, { "x": -78.01783264746228, "y": 16.289437585733886, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": -38.58024691358025, "y": -60.871056241426615, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": -24.691562776381716, "y": 60.50671283675965, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" }, { "x": -57.441700960219485, "y": -28.360768175583004, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "color": "FFFFFF" } ], "segments": [ { "v0": 0, "v1": 1, "vis": false, "color": "F8F8F8", "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ] }, { "v0": 2, "v1": 3, "curve": 0, "color": "ffffff", "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "pos": [ -700, -80 ], "y": -90 }, { "v0": 3, "v1": 4, "curve": 0, "color": "ffffff", "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "x": -735 }, { "v0": 4, "v1": 5, "curve": 0, "color": "ffffff", "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "pos": [ -700, 80 ], "y": 90 }, { "v0": 6, "v1": 7, "curve": 0, "color": "ffffff", "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "pos": [ 700, -90 ], "y": -90 }, { "v0": 7, "v1": 8, "curve": 0, "color": "ffffff", "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "x": 735 }, { "v0": 8, "v1": 9, "curve": 0, "color": "ffffff", "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "pos": [ 700, 80 ], "y": 90 }, { "v0": 10, "v1": 11, "vis": true, "color": "FFFFFF", "bCoef": 1.15, "cMask": [ "ball" ], "trait": "ballArea", "x": -550 }, { "v0": 12, "v1": 13, "vis": true, "color": "FFFFFF", "bCoef": 1.15, "cMask": [ "ball" ], "trait": "ballArea", "x": -550 }, { "v0": 14, "v1": 15, "vis": true, "color": "ffffff", "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "y": 240 }, { "v0": 16, "v1": 17, "vis": true, "color": "ffffff", "bCoef": 1.15, "cMask": [ "ball" ], "trait": "ballArea", "x": 550 }, { "v0": 18, "v1": 19, "vis": true, "color": "ffffff", "bCoef": 1.15, "cMask": [ "ball" ], "trait": "ballArea", "x": 550 }, { "v0": 20, "v1": 21, "curve": 0, "vis": true, "color": "ffffff", "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "y": -240 }, { "v0": 22, "v1": 23, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "x": -556.5 }, { "v0": 24, "v1": 25, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "x": -556.5 }, { "v0": 26, "v1": 27, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "x": 556.5 }, { "v0": 28, "v1": 29, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "x": 556.5 }, { "v0": 30, "v1": 31, "curve": 0, "vis": true, "color": "861A1A", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": -550 }, { "v0": 32, "v1": 33, "curve": 0, "vis": true, "color": "1F6518", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": 550 }, { "v0": 34, "v1": 35, "curve": -93.241608812827, "vis": true, "color": "FF0000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 36, "v1": 37, "curve": 93.241608812827, "vis": true, "color": "FF0000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 35, "v1": 37, "curve": 0, "vis": true, "color": "FF0000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": -480 }, { "v0": 38, "v1": 39, "curve": 93.241608812827, "vis": true, "color": "17FF00", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 40, "v1": 41, "curve": -93.241608812827, "vis": true, "color": "17FF00", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 42, "v1": 43, "curve": 0, "vis": true, "color": "17FF00", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": 480 }, { "v0": 45, "v1": 44, "curve": 180, "vis": true, "color": "ffffff", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": 480 }, { "v0": 44, "v1": 45, "curve": 180, "vis": true, "color": "ffffff", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": 480 }, { "v0": 47, "v1": 46, "curve": 180, "vis": true, "color": "ffffff", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": 480 }, { "v0": 46, "v1": 47, "curve": 180, "vis": true, "color": "ffffff", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": 480 }, { "v0": 50, "v1": 49, "curve": 180, "vis": true, "color": "ffffff", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": -480 }, { "v0": 49, "v1": 50, "curve": 180, "vis": true, "color": "ffffff", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": -480 }, { "v0": 52, "v1": 51, "curve": 180, "vis": true, "color": "ffffff", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": -480 }, { "v0": 51, "v1": 52, "curve": 180, "vis": true, "color": "ffffff", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": -480 }, { "v0": 54, "v1": 55, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "pos": [ -700, -80 ], "y": -90 }, { "v0": 55, "v1": 56, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "x": -735 }, { "v0": 56, "v1": 57, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "pos": [ -700, 80 ], "y": 90 }, { "v0": 58, "v1": 59, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "pos": [ 700, -90 ], "y": -90 }, { "v0": 59, "v1": 60, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "x": 735 }, { "v0": 60, "v1": 61, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 0.2, "cMask": [ "red", "blue", "ball" ], "trait": "goalPost", "pos": [ 700, 80 ], "y": 90 }, { "v0": 62, "v1": 63, "vis": false, "color": "F8F8F8", "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ] }, { "v0": 64, "v1": 65, "curve": 179.42829117403, "color": "696969", "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "blueKO" ], "curveF": 0.0049891420830909 }, { "v0": 67, "v1": 66, "curve": 180, "color": "696969", "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO" ], "curveF": 6.1232339957368e-17 }, { "v0": 72, "v1": 73, "curve": -180, "vis": true, "color": "B6B6B8", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": 0 }, { "v0": 74, "v1": 75, "curve": 180, "vis": true, "color": "B6B6B8", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": 0 }, { "v0": 76, "v1": 77, "curve": -180, "vis": true, "color": "FFFFFF", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": 0 }, { "v0": 78, "v1": 79, "curve": 180, "vis": true, "color": "FFFFFF", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line", "x": 0 }, { "v0": 81, "v1": 80, "color": "FFFFFF", "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ] }, { "v0": 82, "v1": 83, "color": "FFFFFF", "bCoef": 0.1, "cMask": [ "red", "blue" ], "cGroup": [ "redKO", "blueKO" ] }, { "v0": 84, "v1": 85, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "x": -556.5 }, { "v0": 86, "v1": 87, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "x": -556.5 }, { "v0": 88, "v1": 89, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "x": 556.5 }, { "v0": 90, "v1": 91, "curve": 0, "vis": false, "color": "ffffff", "bCoef": 1, "cMask": [ "ball" ], "trait": "ballArea", "x": 556.5 }, { "v0": 93, "v1": 94, "curve": 0, "vis": true, "color": "FF0000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 95, "v1": 96, "curve": 0, "vis": true, "color": "17FF00", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 97, "v1": 98, "curve": 0.24253394659510763, "vis": true, "color": "000000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 99, "v1": 100, "curve": 0, "vis": true, "color": "FFFFFF", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 95, "v1": 101, "curve": 0, "vis": true, "color": "17FF00", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 102, "v1": 103, "curve": 1.2233509494276795, "vis": true, "color": "FF0000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 104, "v1": 105, "curve": 0, "vis": true, "color": "FFFFFF", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 106, "v1": 107, "curve": 0, "vis": true, "color": "FFFFFF", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 108, "v1": 109, "curve": 0.5729530205541818, "vis": true, "color": "000000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 110, "v1": 111, "curve": 0.5729530205541818, "vis": true, "color": "000000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 112, "v1": 113, "curve": 0, "vis": true, "color": "FFFFFF", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 114, "v1": 115, "curve": 0, "vis": true, "color": "17FF00", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 116, "v1": 117, "curve": -1.2706532938642772, "vis": true, "color": "000000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 118, "v1": 119, "curve": 0, "vis": true, "color": "000000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 120, "v1": 121, "curve": 0, "vis": true, "color": "FF0000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 122, "v1": 123, "curve": 1.2233509494276795, "vis": true, "color": "FF0000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 124, "v1": 125, "curve": 0, "vis": true, "color": "FFFFFF", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 126, "v1": 127, "curve": 0.5729530205541818, "vis": true, "color": "000000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 128, "v1": 129, "curve": 0, "vis": true, "color": "17FF00", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 130, "v1": 131, "curve": 0, "vis": true, "color": "17FF00", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 132, "v1": 133, "curve": 86.42017878350782, "vis": true, "color": "000000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 134, "v1": 135, "curve": -93.40270921065225, "vis": true, "color": "000000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 136, "v1": 137, "curve": -7.242648561701091, "vis": true, "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 138, "v1": 139, "curve": 0, "vis": true, "color": "FF0000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 140, "v1": 141, "curve": 1.2233509494276795, "vis": true, "color": "FF0000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 142, "v1": 143, "curve": 0.5729530205541818, "vis": true, "color": "000000", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 144, "v1": 145, "curve": 0, "vis": true, "color": "FFFFFF", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" }, { "v0": 146, "v1": 147, "curve": 0, "vis": true, "color": "FFFFFF", "bCoef": 0.1, "cMask": [ "wall" ], "trait": "line" } ], "planes": [ { "normal": [ 0, 1 ], "dist": -350, "bCoef": 0.1 }, { "normal": [ -1, 0 ], "dist": -784, "bCoef": 0.1 }, { "normal": [ 0, -1 ], "dist": -320, "cMask": [ "ball" ] }, { "normal": [ 0, -1 ], "dist": -350, "bCoef": 0.1 }, { "normal": [ 1, 0 ], "dist": -777, "bCoef": 0.1 }, { "normal": [ 0, 1 ], "dist": -320, "cMask": [ "ball" ] } ], "goals": [ { "p0": [ -707.5, -90 ], "p1": [ -707.5, 90 ], "team": "red", "color": "ffffff" }, { "p0": [ 707.5, 90 ], "p1": [ 707.5, -90 ], "team": "blue", "color": "ffffff" } ], "discs": [ { "radius": 5.5, "invMass": 0, "pos": [ -700, 90 ], "color": "FF0000", "trait": "goalPost", "y": 90 }, { "radius": 5.5, "invMass": 0, "pos": [ -700, -90 ], "color": "FF0000", "trait": "goalPost", "y": -85, "x": -560 }, { "radius": 5.5, "invMass": 0, "pos": [ 700, 90 ], "color": "17FF00", "trait": "goalPost", "y": 90 }, { "radius": 5.5, "invMass": 0, "pos": [ 700, -90 ], "color": "17FF00", "trait": "goalPost", "y": -85, "vis": true } ], "playerPhysics": { "bCoef": 0.1, "acceleration": 0.11, "kickingAcceleration": 0.083, "kickStrength": 5 }, "ballPhysics": { "radius": 6.25, "bCoef": 0.4, "invMass": 1.5, "color": "FFFFFF" }, "spawnDistance": 200, "traits": { "ballArea": { "vis": false, "bCoef": 1, "cMask": [ "ball" ] }, "goalPost": { "radius": 8, "invMass": 0, "bCoef": 0.5 }, "goalNet": { "vis": true, "bCoef": 0.1, "cMask": [ "ball" ] }, "line": { "vis": true, "bCoef": 0.1, "cMask": [ "" ] }, "kickOffBarrier": { "vis": false, "bCoef": 0.1, "cGroup": [ "redKO", "blueKO" ], "cMask": [ "red", "blue" ] } }, "joints": [], "redSpawnPoints": [], "blueSpawnPoints": [] }';
 
+var uniforms = {
+	/* SELECCIONES */
+	"pal": {
+		"name": 'Palestino',
+		"type": Uniform.COUNTRY,
+		"emoji": '⚫🔴🟡',
+		"angle": 40,
+		"textcolor": 0xffffff,
+		"color1": 0x030000,
+		"color2": 0x125707,
+		"color3": 0xFF0000,
+		"angle2": 90,
+		"textcolor2": 0xDEFF08,
+		"color21": 0x000000,
+		"color22": 0x313302,
+		"color23": 0x000000,
+	},
+	"cpa": {
+		"name": 'Cantera CD Palestino',
+		"type": Uniform.COUNTRY,
+		"emoji": '⚪🟢🔴',
+		"angle": 90,
+		"textcolor": 0x14FF00,
+		"color1": 0x000000,
+		"color2": 0x136602,
+		"color3": 0x000000,
+		"angle2": 230,
+		"textcolor2": 0xFF0000,
+		"color21": 0x000000,
+		"color22": 0x3D0000,
+		"color23": 0xC40000,
+	},
+	"avf": {
+		"name": 'Ave Fenix',
+		"type": Uniform.COUNTRY,
+		"emoji": '🟡🟢',
+		"angle": 60,
+		"textcolor": 0xA3260D,
+		"color1": 0xA11C0D,
+		"color2": 0x000000,
+		"color3": 0x000000,
+		"angle2": 60,
+		"textcolor2": 0x85230A,
+		"color21": 0xEDE4E5,
+		"color22": 0xC2C2C2,
+		"color23": 0xA0A392,
+	},
+	"esp": {
+		"name": 'Espo City',
+		"type": Uniform.COUNTRY,
+		"emoji": '🟢🟡🔵',
+		"angle": 120,
+		"textcolor": 0xffffff,
+		"color1": 0x22A800,
+		"color2": 0x0C7800,
+		"color3": 0x044D0B,
+		"angle2": 120,
+		"textcolor2": 0x3B3B3B,
+		"color21": 0xD4FF00,
+		"color22": 0xCFC800,
+		"color23": 0xBFA500,
+	},
+
+	/* ESTANDAR */
+		"red": {
+		"name": 'Rojo',
+		"type": Uniform.CLUBLA,
+		"angle": 60,
+		"textcolor": 0xFFFFFF,
+		"color1": 0xC40202,
+		"color2": 0xC40202,
+		"color3": 0xC40202,
+		"angle2": 90,
+		"textcolor2": 0xFFFFFF,
+		"color21": 0xC4B702,
+		"color22": 0xC4B702,
+		"color23": 0xC4B702,
+	},
+	    "blu": {
+		"name": 'Azul',
+		"type": Uniform.CLUBLA,
+		"angle": 0,
+		"textcolor": 0xFFFFFF,
+		"color1": 0x0208C4,
+		"color2": 0x0208C4,
+		"color3": 0x0208C4,
+		"angle2": 0,
+		"textcolor2": 0xFFFFFF,
+		"color21": 0x00C4C4,
+		"color22": 0x00C4C4,
+		"color23": 0x00C4C4,	
+	}
+}
 
 
 /* OPTIONS */
 
+var nameHome = 'Rojo';
+var acronymHome = "red";
+var nameGuest = 'Azul';
+var acronymGuest = "blu";
+var emojiHome = '🔵⚪🔵';
+var emojiGuest = '🟡🟢';
 var afkLimit = 12;
 var drawTimeLimit = Infinity;
 var maxTeamSize = 4; // This works for 1 (you might want to adapt things to remove some useless stats in 1v1 like assist or cs), 2, 3 or 4
 var slowMode = 0;
+
+room.setTeamColors(1, uniforms[acronymHome].angle, uniforms[acronymHome].textcolor, [uniforms[acronymHome].color1, uniforms[acronymHome].color2, uniforms[acronymHome].color3]);
+
+room.setTeamColors(2, uniforms[acronymGuest].angle, uniforms[acronymGuest].textcolor, [uniforms[acronymGuest].color1, uniforms[acronymGuest].color2, uniforms[acronymGuest].color3]);
 
 /* PLAYERS */
 
@@ -134,6 +240,16 @@ function pointDistance(p1, p2) {
 	return Math.sqrt(d1 * d1 + d2 * d2);
 }
 
+function getUniform(uniformStr) {
+	if (uniforms.hasOwnProperty(uniformStr)) return uniformStr;
+	for (const [key, value] of Object.entries(uniforms)) {
+		for (let i = 0; i < value.aliases.length; i++) {
+			if (value.aliases[i] === uniformStr) return key;
+		}
+	}
+	return false;
+}
+
 /* BUTTONS */
 
 function PublicitaDiscord(player) {
@@ -150,8 +266,32 @@ function PublicitaDiscord(player) {
 function PublicitaDonacion(player) {
     var scores = room.getScores();
     if (scores.time > 30 && !isTimeAddedShownsiete) {
-    room.sendAnnouncement("「💻」 ¡[𝐒𝐕 𝐞𝐧 𝐩𝐫𝐮𝐞𝐛𝐚] 𝐏𝐫𝐨𝐱. 𝐚𝐜𝐭𝐮𝐚𝐥𝐢𝐳𝐚𝐜𝐢𝐨𝐧 𝐣𝐮𝐞𝐯𝐞𝐬 𝟐𝟔/𝟎𝟓!", player, 0x2BFF00, "bold");
+    room.sendAnnouncement("「💻」 ¡[𝐒𝐕 𝐚𝐮𝐧 𝐞𝐧 𝐩𝐫𝐮𝐞𝐛𝐚] 𝐏𝐫𝐨𝐱. 𝐚𝐜𝐭𝐮𝐚𝐥𝐢𝐳𝐚𝐜𝐢𝐨𝐧𝐞𝐬 𝐬𝐞𝐫𝐚𝐧 𝐜𝐨𝐦𝐮𝐧𝐢𝐜𝐚𝐝𝐚𝐬 𝐞𝐧 𝐧𝐮𝐞𝐬𝐭𝐫𝐨 𝐝𝐢𝐬𝐜𝐨𝐫𝐝 𝐨𝐟𝐢𝐜𝐢𝐚𝐥.", player, 0x2BFF00, "bold");
     isTimeAddedShownsiete = true;
+    }
+}
+
+function PublicitaHelp(player) {
+    var scores = room.getScores();
+    if (scores.time > 140 && !isTimeAddedShowncinco) {
+    room.sendAnnouncement("「📣」 ¡𝐒𝐢𝐠𝐮𝐞𝐧𝐨𝐬 𝐞𝐧 𝐧𝐮𝐞𝐬𝐭𝐫𝐚𝐬 𝐫𝐞𝐝𝐞𝐬! - 𝐓𝐢𝐤𝐭𝐨𝐤 @𝐭𝐢𝐧𝐨𝐭𝐢𝐧𝐨𝐥𝐞𝐚𝐠𝐮𝐞. 𝐌𝐚𝐬 𝐢𝐧𝐟𝐨𝐫𝐦𝐚𝐜𝐢𝐨𝐧 𝐞𝐧 !𝐫𝐞𝐝𝐞𝐬", player, 0x2BFF00, "bold");
+    isTimeAddedShowncinco = true;
+    }
+}
+
+function PublicitaLiga(player) {
+    var scores = room.getScores();
+    if (scores.time > 200 && !isTimeAddedShowncuatro) {
+    room.sendAnnouncement("「📣」 𝐄𝐬𝐭𝐚𝐦𝐨𝐬 𝐜𝐞𝐫𝐜𝐚 𝐝𝐞 𝐜𝐨𝐦𝐞𝐧𝐳𝐚𝐫 𝐥𝐚 𝟏𝐫𝐚 𝐭𝐞𝐦𝐩𝐨𝐫𝐚𝐝𝐚 𝐝𝐞 𝐥𝐚 𝐥𝐢𝐠𝐚. ¡𝐕𝐞 𝐚 𝐢𝐧𝐬𝐜𝐫𝐢𝐛𝐢𝐫𝐭𝐞 𝐜𝐨𝐧 𝐭𝐮 𝐞𝐪𝐮𝐢𝐩𝐨 𝐞𝐧 𝐧𝐮𝐞𝐬𝐭𝐫𝐨 𝐝𝐢𝐬𝐜𝐨𝐫𝐝!", player, 0x2BFF00, "bold");
+    isTimeAddedShowncuatro = true;
+    }
+}
+
+function PublicitaLiga2(player) {
+    var scores = room.getScores();
+    if (scores.time > 220 && !isTimeAddedShown) {
+    room.sendAnnouncement("「📣」 ¡𝐔𝐬𝐚 !𝐭𝐞𝐦𝐩𝐨𝐫𝐚𝐝𝐚 𝐩𝐚𝐫𝐚 𝐯𝐞𝐫 𝐥𝐨𝐬 𝐞𝐪𝐮𝐢𝐩𝐨𝐬 𝐢𝐧𝐬𝐜𝐫𝐢𝐭𝐨𝐬 𝐞𝐧 𝐥𝐚 𝐥𝐢𝐠𝐚!", player, 0x2BFF00, "bold");
+    isTimeAddedShown = true;
     }
 }
 
@@ -758,15 +898,19 @@ setInterval(() => {
 room.onPlayerJoin = function(player) {
 	extendedP.push([player.id, player.auth, player.conn, false, 0, 0, false]);
 	updateRoleOnPlayerIn();
-	room.sendChat("[PV] 👋 Hola " + player.name + " ! Escribe '!ayuda' para ver los comandos.", player.id);
-	room.sendChat("[PV] 💻 [𝐒𝐕 𝐞𝐧 𝐩𝐫𝐮𝐞𝐛𝐚] ", player.id);
+	room.sendAnnouncement(" 👋 Hola " + player.name + " ! Escribe '!ayuda' para ver los comandos.", player.id, 0x0EA157, "bold");
+	room.sendAnnouncement(" 💻 [𝐒𝐕 𝐞𝐧 𝐩𝐫𝐮𝐞𝐛𝐚]", player.id, 0x0EA157, "bold");
 	if (localStorage.getItem(player.auth) != null) {
 		if (JSON.parse(localStorage.getItem(player.auth))[Ss.RL] != "player") {
 			room.setPlayerAdmin(player.id, true);
-			room.sendChat((JSON.parse(localStorage.getItem(player.auth))[Ss.RL] == "master" ? "El Maestro " : "Admin ") + player.name + " llegó a poner orden en la sala !");
+			room.sendAnnouncement((JSON.parse(localStorage.getItem(player.auth))[Ss.RL] == "master" ? "El Maestro " : "Admin ") + player.name + " llegó a poner orden en la sala!", null, 0x00F7FF, "bold");
 		}
 	}
-}
+	if (localStorage.getItem(getAuth(player)) == null) {
+		stats = [0, 0, 0, 0, "0.00", 0, 0, 0, 0, "0.00", "player", player.name];
+		localStorage.setItem(getAuth(player), JSON.stringify(stats));
+	}
+};
 
 room.onPlayerTeamChange = function(changedPlayer, byPlayer) {
 	if (changedPlayer.id == 0) {
@@ -843,11 +987,12 @@ room.onPlayerKicked = function(kickedPlayer, reason, ban, byPlayer) {
 /* PLAYER ACTIVITY */
 
 room.onPlayerChat = function (player, message) {
+	originalMessage = message;
 	message = message.split(/ +/);
 	player.team != Team.SPECTATORS ? setActivity(player, 0) : null;
 	if (["!ayuda"].includes(message[0].toLowerCase())) {
-		room.sendChat("[PV] Comandos : !me, !games, !wins, !goals, !assists, !cs, !afks, !mutes, !bans.", player.id);
-		player.admin ? room.sendChat("[PV] Admin : !mute <duration = 3> #<id>, !unmute all/#<id>, !clearbans <number = all>, !slow <duration>, !endslow", player.id) : null;
+		room.sendAnnouncement("[PV] Comandos : !me, !juegos, !victorias, !goles, !asist, !cs, !rangos, !discord, !redes, !temporada, !uni, !reserva.", player.id, 0x0EA157, "bold");
+		player.admin ? room.sendAnnouncement("[PV] Admin : !mute <duration = 3> #<id>, !unmute all/#<id>, !clearbans <number = all>, !slow <duration>, !endslow", player.id, 0x0EA157, "bold") : null;
 	}
 	else if (["!afk"].includes(message[0].toLowerCase())) {
 		if (players.length != 1 && player.team != Team.SPECTATORS) {
@@ -855,7 +1000,7 @@ room.onPlayerChat = function (player, message) {
 				room.setPlayerTeam(player.id, Team.SPECTATORS);
 			}
 			else {
-				room.sendChat("No puedes ser AFK mientras estás en un equipo !", player.id);
+				room.sendAnnouncement("No puedes ser AFK mientras estás en un equipo !", player.id, 0x0EA157, "bold");
 				return false;
 			}
 		}
@@ -863,7 +1008,8 @@ room.onPlayerChat = function (player, message) {
 			room.setPlayerTeam(player.id, Team.SPECTATORS);
 		}
 		setAFK(player, !getAFK(player));
-		room.sendChat(player.name + (getAFK(player) ? "se durmió! 😴" : " se levantó ! 😋"));
+		var announcementMessage = player.name + (getAFK(player) ? " se durmió! 😴" : " se levantó ! 😋");
+        room.sendAnnouncement(announcementMessage, null, 0x0EA157, "bold");
 		getAFK(player) ? updateRoleOnPlayerOut() : updateRoleOnPlayerIn();
 	}
 	else if (["!afks", "!afklist"].includes(message[0].toLowerCase())) {
@@ -885,12 +1031,34 @@ room.onPlayerChat = function (player, message) {
 		cstm += ".";
 		room.sendChat(cstm, player.id);
 	}
+	if (message[0].toLowerCase() === "t") {
+        var teamMessage = message.slice(1).join(" "); // Extrae el texto después de la "t" y une las palabras nuevamente
+        if (player.team == 1) {
+			var teamPlayers = room.getPlayerList().filter((player) => player.team == 1);
+			teamPlayers.forEach(function(teamPlayer) {
+				room.sendAnnouncement("[Team] " + player.name + ": " + teamMessage, teamPlayer.id, 0xED6A5A, "bold", 1);
+			});
+		}
+		if (player.team == 2) {
+			var teamPlayers = room.getPlayerList().filter((player) => player.team == 2);
+			teamPlayers.forEach(function(teamPlayer) {
+				room.sendAnnouncement("[Team] " + player.name + ": " + teamMessage, teamPlayer.id, 0x5995ED, "bold", 1);
+			});
+		}
+		if (player.team == 0) {
+			var teamPlayers = room.getPlayerList().filter((player) => player.team == 0);
+			teamPlayers.forEach(function(teamPlayer) {
+				room.sendAnnouncement("[Spec] " + player.name + ": " + teamMessage, teamPlayer.id, 0xdee7fa, "bold", 1);
+			});
+		}
+		return false;
+	}
 	else if (["!me"].includes(message[0].toLowerCase())) {
 		var stats;
 		localStorage.getItem(getAuth(player)) ? stats = JSON.parse(localStorage.getItem(getAuth(player))) : stats = [0, 0, 0, 0, "0.00", 0, 0, 0, 0, "0.00"];
-		room.sendChat("[PV] " + player.name + "> PJ: " + stats[Ss.GA] + ", Victorias: " + stats[Ss.WI] + ", Empates: " + stats[Ss.DR] + ", Derrotas: " + stats[Ss.LS] + ", WR: " + stats[Ss.WR] + "%, Goles: " + stats[Ss.GL] + ", Asistencias: " + stats[Ss.AS] + ", GK: " + stats[Ss.GK] + ", CS: " + stats[Ss.CS] + ", CS%: " + stats[Ss.CP] + "%", player.id);
+		room.sendAnnouncement("[PV] " + player.name + "> PJ: " + stats[Ss.GA] + ", Victorias: " + stats[Ss.WI] + ", Empates: " + stats[Ss.DR] + ", Derrotas: " + stats[Ss.LS] + ", WR: " + stats[Ss.WR] + "%, Goles: " + stats[Ss.GL] + ", Asistencias: " + stats[Ss.AS] + ", GK: " + stats[Ss.GK] + ", CS: " + stats[Ss.CS] + ", CS%: " + stats[Ss.CP] + "%", player.id, 0x0EA157, "bold");
 	}
-	else if (["!games"].includes(message[0].toLowerCase())) {
+	else if (["!juegos"].includes(message[0].toLowerCase())) {
 		var tableau = [];
 		try{
 		Object.keys(localStorage).forEach(function (key) { if (!["player_name", "view_mode", "geo", "avatar", "player_auth_key"].includes(key)) { tableau.push([(JSON.parse(localStorage.getItem(key))[Ss.NK]), (JSON.parse(localStorage.getItem(key))[Ss.GA])]); } });
@@ -899,13 +1067,13 @@ room.onPlayerChat = function (player, message) {
 			
 		}	
 		if (tableau.length < 5) {
-			room.sendChat("[PV] Aún no se han jugado partidos suficientes.", player.id);
+			room.sendAnnouncement("[PV] Aún no se han jugado partidos suficientes.", player.id, 0x0EA157, "bold");
 			return false;
 		}
 		tableau.sort(function (a, b) { return b[1] - a[1]; });
-		room.sendChat("[PV] Partidos Jugados> #1 " + tableau[0][0] + ": " + tableau[0][1] + " #2 " + tableau[1][0] + ": " + tableau[1][1] + " #3 " + tableau[2][0] + ": " + tableau[2][1] + " #4 " + tableau[3][0] + ": " + tableau[3][1] + " #5 " + tableau[4][0] + ": " + tableau[4][1], player.id);
+		room.sendAnnouncement("[PV] Partidos Jugados> #1 " + tableau[0][0] + ": " + tableau[0][1] + " #2 " + tableau[1][0] + ": " + tableau[1][1] + " #3 " + tableau[2][0] + ": " + tableau[2][1] + " #4 " + tableau[3][0] + ": " + tableau[3][1] + " #5 " + tableau[4][0] + ": " + tableau[4][1], player.id, 0x0EA157, "bold");
 	}
-	else if (["!wins"].includes(message[0].toLowerCase())) {
+	else if (["!victorias"].includes(message[0].toLowerCase())) {
 		var tableau = [];
 		try{
 		Object.keys(localStorage).forEach(function (key) { if (!["player_name", "view_mode", "geo", "avatar", "player_auth_key"].includes(key)) { tableau.push([(JSON.parse(localStorage.getItem(key))[Ss.NK]), (JSON.parse(localStorage.getItem(key))[Ss.WI])]); } });
@@ -914,13 +1082,13 @@ room.onPlayerChat = function (player, message) {
 			
 		}
 		if (tableau.length < 5) {
-			room.sendChat("[PV] Aún no se han jugado partidos suficientes.", player.id);
+			room.sendAnnouncement("[PV] Aún no se han jugado partidos suficientes.", player.id, 0x0EA157, "bold");
 			return false;
 		}
 		tableau.sort(function (a, b) { return b[1] - a[1]; });
-		room.sendChat("[PV] Victorias> #1 " + tableau[0][0] + ": " + tableau[0][1] + " #2 " + tableau[1][0] + ": " + tableau[1][1] + " #3 " + tableau[2][0] + ": " + tableau[2][1] + " #4 " + tableau[3][0] + ": " + tableau[3][1] + " #5 " + tableau[4][0] + ": " + tableau[4][1], player.id);
+		room.sendAnnouncement("[PV] Victorias> #1 " + tableau[0][0] + ": " + tableau[0][1] + " #2 " + tableau[1][0] + ": " + tableau[1][1] + " #3 " + tableau[2][0] + ": " + tableau[2][1] + " #4 " + tableau[3][0] + ": " + tableau[3][1] + " #5 " + tableau[4][0] + ": " + tableau[4][1], player.id, 0x0EA157, "bold");
 	}
-	else if (["!goals"].includes(message[0].toLowerCase())) {
+	else if (["!goles"].includes(message[0].toLowerCase())) {
 		var tableau = [];
 		try{
 		Object.keys(localStorage).forEach(function (key) { if (!["player_name", "view_mode", "geo", "avatar", "player_auth_key"].includes(key)) { tableau.push([(JSON.parse(localStorage.getItem(key))[Ss.NK]), (JSON.parse(localStorage.getItem(key))[Ss.GL])]); } });
@@ -929,13 +1097,13 @@ room.onPlayerChat = function (player, message) {
 			
 		}
 		if (tableau.length < 5) {
-			room.sendChat("[PV] Aún no se han jugado partidos suficientes.", player.id);
+			room.sendAnnouncement("[PV] Aún no se han jugado partidos suficientes.", player.id, 0x0EA157, "bold");
 			return false;
 		}
 		tableau.sort(function (a, b) { return b[1] - a[1]; });
-		room.sendChat("[PV] Goles> #1 " + tableau[0][0] + ": " + tableau[0][1] + " #2 " + tableau[1][0] + ": " + tableau[1][1] + " #3 " + tableau[2][0] + ": " + tableau[2][1] + " #4 " + tableau[3][0] + ": " + tableau[3][1] + " #5 " + tableau[4][0] + ": " + tableau[4][1], player.id);
+		room.sendAnnouncement("[PV] Goles> #1 " + tableau[0][0] + ": " + tableau[0][1] + " #2 " + tableau[1][0] + ": " + tableau[1][1] + " #3 " + tableau[2][0] + ": " + tableau[2][1] + " #4 " + tableau[3][0] + ": " + tableau[3][1] + " #5 " + tableau[4][0] + ": " + tableau[4][1], player.id, 0x0EA157, "bold");
 	}
-	else if (["!assists"].includes(message[0].toLowerCase())) {
+	else if (["!asist"].includes(message[0].toLowerCase())) {
 		var tableau = [];
 		try{
 		Object.keys(localStorage).forEach(function (key) { if (!["player_name", "view_mode", "geo", "avatar", "player_auth_key"].includes(key)) { tableau.push([(JSON.parse(localStorage.getItem(key))[Ss.NK]), (JSON.parse(localStorage.getItem(key))[Ss.AS])]); } });
@@ -944,11 +1112,11 @@ room.onPlayerChat = function (player, message) {
 			
 		}
 		if (tableau.length < 5) {
-			room.sendChat("[PV] Aún no se han jugado partidos suficientes.", player.id);
+			room.sendAnnouncement("[PV] Aún no se han jugado partidos suficientes.", player.id, 0x0EA157, "bold");
 			return false;
 		}
 		tableau.sort(function (a, b) { return b[1] - a[1]; });
-		room.sendChat("[PV] Asistencias> #1 " + tableau[0][0] + ": " + tableau[0][1] + " #2 " + tableau[1][0] + ": " + tableau[1][1] + " #3 " + tableau[2][0] + ": " + tableau[2][1] + " #4 " + tableau[3][0] + ": " + tableau[3][1] + " #5 " + tableau[4][0] + ": " + tableau[4][1], player.id);
+		room.sendAnnouncement("[PV] Asistencias> #1 " + tableau[0][0] + ": " + tableau[0][1] + " #2 " + tableau[1][0] + ": " + tableau[1][1] + " #3 " + tableau[2][0] + ": " + tableau[2][1] + " #4 " + tableau[3][0] + ": " + tableau[3][1] + " #5 " + tableau[4][0] + ": " + tableau[4][1], player.id, 0x0EA157, "bold");
 	}
 	else if (["!cs"].includes(message[0].toLowerCase())) {
 		var tableau = [];
@@ -959,12 +1127,55 @@ room.onPlayerChat = function (player, message) {
 			
 		}
 		if (tableau.length < 5) {
-			room.sendChat("[PV] Aún no se han jugado partidos suficientes.", player.id);
+			room.sendAnnouncement("[PV] Aún no se han jugado partidos suficientes.", player.id, 0x0EA157, "bold");
 			return false;
 		}
 		tableau.sort(function (a, b) { return b[1] - a[1]; });
-		room.sendChat("[PV] Vallas Invictas> #1 " + tableau[0][0] + ": " + tableau[0][1] + " #2 " + tableau[1][0] + ": " + tableau[1][1] + " #3 " + tableau[2][0] + ": " + tableau[2][1] + " #4 " + tableau[3][0] + ": " + tableau[3][1] + " #5 " + tableau[4][0] + ": " + tableau[4][1], player.id);
+		room.sendAnnouncement("[PV] Vallas Invictas> #1 " + tableau[0][0] + ": " + tableau[0][1] + " #2 " + tableau[1][0] + ": " + tableau[1][1] + " #3 " + tableau[2][0] + ": " + tableau[2][1] + " #4 " + tableau[3][0] + ": " + tableau[3][1] + " #5 " + tableau[4][0] + ": " + tableau[4][1], player.id, 0x0EA157, "bold");
 	}
+	else if (["!discord"].includes(message[0].toLowerCase())) {
+      var discordLink = "https://discord.gg/V2j4wFFEjd";
+      room.sendAnnouncement("                                  ¡Únete al Discord de Tino Tino League!", null, 0x2BFF00, "bold");
+      room.sendAnnouncement("                                  " + discordLink, null, 0x2BFF00, "bold");
+    }
+	else if (["!temporada"].includes(message[0].toLowerCase())) {
+        room.sendAnnouncement("[🏆] Equipos inscritos en la temporada 1:", null, 0x2BFF00, "bold");
+        room.sendAnnouncement("・Palestino", null, 0x2BFF00, "bold");
+        room.sendAnnouncement("・Cantera Palestino", null, 0x2BFF00, "bold");
+        room.sendAnnouncement("・Ave fenix", null, 0x2BFF00, "bold");
+        room.sendAnnouncement("・Espo city", null, 0x2BFF00, "bold");
+    }
+	else if (["!redes"].includes(message[0].toLowerCase())) {
+      var tiktokLink = "@tinotinoleague";
+      room.sendAnnouncement("                                  ¡Siguenos en nuestro Tiktok!", null, 0x2BFF00, "bold");
+      room.sendAnnouncement("                                  " + tiktokLink, null, 0x2BFF00, "bold");
+	}
+	else if (message[0].toLowerCase() === "!rangos") {
+    const rangos = [
+        { emoji: "🧙‍♂️ ", nombre: "[𝐈𝐜𝐨𝐧𝐨]", nivel: "150 wins" },
+        { emoji: "🦅", nombre: "[𝐄𝐥𝐢𝐭𝐞]", nivel: "115 wins" },
+        { emoji: "🌟", nombre: "[𝐄𝐬𝐭𝐫𝐞𝐥𝐥𝐚]", nivel: "100 wins" },
+        { emoji: "🎖️", nombre: "[𝐃𝐢𝐬𝐭𝐢𝐧𝐠𝐮𝐢𝐝𝐨]", nivel: "85 wins" },
+        { emoji: "💥", nombre: "[𝐕𝐞𝐭𝐞𝐫𝐚𝐧𝐨]", nivel: "65 wins" },
+        { emoji: "👾", nombre: "[𝐃𝐢𝐚𝐦𝐚𝐧𝐭𝐞]", nivel: "50 wins" },
+        { emoji: "🏅", nombre: "[𝐎𝐫𝐨]", nivel: "35 wins" },
+        { emoji: "🥈", nombre: "[𝐏𝐥𝐚𝐭𝐚]", nivel: "20 wins" },
+        { emoji: "🥉", nombre: "[𝐁𝐫𝐨𝐧𝐜𝐞]", nivel: "5 wins" },
+        { emoji: "👋🏼", nombre: "[𝐍𝐨𝐯𝐚𝐭𝐨]", nivel: "0 wins" }
+    ];
+	
+    let mensajeRangos2 = "Rangos disponibles"
+	let mensajeRangos = " ";
+	for (let i = 0; i < rangos.length; i++) {
+        const rango = rangos[i];
+        mensajeRangos += rango.emoji + " " + rango.nombre + " " + rango.nivel + " ";
+        if (i < rangos.length - 1) {
+            mensajeRangos += " -  ";
+        }
+    }
+    room.sendAnnouncement(mensajeRangos2, player.id, 0x2BFF00, "bold");
+	room.sendAnnouncement(mensajeRangos, player.id, 0x2BFF00, "bold");
+    }
 	else if (["!claim"].includes(message[0].toLowerCase())) {
 		if (message[1] == adminPassword) {
 			room.setPlayerAdmin(player.id, true);
@@ -1011,6 +1222,87 @@ room.onPlayerChat = function (player, message) {
 			}
 		}
 	}
+	else if (message[0].toLowerCase() === "!uni") {
+	if (!room.getPlayerList().some(p => p.id === player.id)) {
+        room.sendAnnouncement("No puedes usar el comando si no estás jugando.", player.id, 0x0EA157, "bold");
+        return false;
+    }
+    if (player.team === 0) {
+        room.sendAnnouncement("No puedes usar el comando si no estás en un equipo.", player.id, 0x0EA157, "bold");
+        return false;
+	}
+	var teamPlayerslist = room.getPlayerList().filter(p => p.team === player.team);
+    var firstPlayer = teamPlayerslist[0];
+    if (firstPlayer.id !== player.id) {
+        room.sendAnnouncement("Solo el capitan del equipo puede cambiar el uniforme.", player.id, 0x0EA157, "bold");
+        return false;
+    }
+    if (message.length === 1) {
+        try {
+            var uniformString = "[🏆] EQUIPOS TINO TINO LEAGUE :";
+            for (const [key, value] of Object.entries(uniforms)) {
+                if (value.type === Uniform.COUNTRY) uniformString += ` ${value.name}: !uni ${key} |`;
+            }
+            uniformString += `\n`;
+            room.sendAnnouncement(uniformString, player.id, announcementColor, "bold", Notification.CHAT);
+            uniformString2 = `[🏆] ESTANDAR :`;
+            for (const [key, value] of Object.entries(uniforms)) {
+                if (value.type === Uniform.CLUBLA) uniformString2 += ` ${value.name}: !uni ${key} |`;
+            }
+            uniformString2 += `\n`;
+            room.sendAnnouncement(uniformString2, player.id, announcementColor, "bold", Notification.CHAT);
+            room.sendAnnouncement("Para elegir un uniforme para su equipo escriba '!uni <nombre del equipo>'.", player.id, announcementColor, "bold", Notification.CHAT);
+        } catch (err) {
+            console.error(err);
+            room.sendAnnouncement("Elige un uniforme que exista.", player.id, announcementColor, "bold", Notification.CHAT);
+        }
+    } else if (message.length >= 2) {
+        try {
+            var uniformName = getUniform(message[1].toLowerCase());
+            if (uniformName !== false && uniforms[uniformName].name !== false) {
+                room.sendAnnouncement(`[🏆] El uniforme de \'${uniforms[uniformName].name}\' fue colocado en su team. Con !reserva usas la de visita`, player.id, announcementColor, "bold", Notification.CHAT);
+
+                room.setTeamColors(player.team, uniforms[uniformName].angle, uniforms[uniformName].textcolor, [uniforms[uniformName].color1, uniforms[uniformName].color2, uniforms[uniformName].color3]);
+
+                if (player.team == 1) {
+                    nameHome = uniforms[uniformName].name;
+                    acronymHome = uniformName;
+                    emojiHome = uniforms[uniformName].emoji;
+                } else if (player.team == 2) {
+                    nameGuest = uniforms[uniformName].name;
+                    acronymGuest = uniformName;
+                    emojiGuest = uniforms[uniformName].emoji;
+                }
+            } else {
+                room.sendAnnouncement(`[🏆] Ese uniforme no existe, escriba '!uni' para ver todos los disponibles.`, player.id, announcementColor, "bold", Notification.CHAT);
+            }
+        } catch (err) {
+            console.error(err);
+            room.sendAnnouncement("Ese uniforme no esta disponible.", player.id, announcementColor, "bold", Notification.CHAT);
+        }
+    }
+}
+    else if (message[0].toLowerCase() === "!reserva") {
+	var teamPlayerslist = room.getPlayerList().filter(p => p.team === player.team);
+    var firstPlayer = teamPlayerslist[0];
+    if (firstPlayer.id !== player.id) {
+        room.sendAnnouncement("Solo el capitan del equipo puede cambiar el uniforme.", player.id, 0x0EA157, "bold");
+        return false;
+    }
+    if (player.team === 1 && nameHome !== 'Local') {
+        room.setTeamColors(player.team, uniforms[acronymHome].angle2, uniforms[acronymHome].textcolor2, [uniforms[acronymHome].color21, uniforms[acronymHome].color22, uniforms[acronymHome].color23]);
+		room.sendAnnouncement(`[🏆] El uniforme de visita de ${nameHome} fue colocado.`, player.id, announcementColor, "bold", Notification.CHAT);
+    } else if (player.team === 1 && nameHome === 'Local') {
+        room.sendAnnouncement(`[🏆] Ese equipo aun no tiene un uniforme, escriba !uni para ver los disponibles.`, player.id, announcementColor, "bold", Notification.CHAT);
+    }
+
+    if (player.team === 2 && nameGuest !== 'Visitante') {
+        room.setTeamColors(player.team, uniforms[acronymGuest].angle2, uniforms[acronymGuest].textcolor2, [uniforms[acronymGuest].color21, uniforms[acronymGuest].color22, uniforms[acronymGuest].color23]);
+		room.sendAnnouncement(`[🏆] El uniforme de visita de ${nameHome} fue colocado.`, player.id, announcementColor, "bold", Notification.CHAT);
+    } else if (player.team === 2 && nameGuest === 'Visitante') {
+        room.sendAnnouncement(`[🏆] Ese equipo aun no tiene un uniforme, escriba !uni para ver los disponibles.`, player.id, announcementColor, "bold", Notification.CHAT);
+    }
+}
 	else if (["!mutes", "!mutelist"].includes(message[0].toLowerCase())) {
 		var cstm = "[PV] Lista de muteados : ";
 		for (var i = 0; i < extendedP.length; i++) {
@@ -1251,6 +1543,58 @@ room.onPlayerChat = function (player, message) {
 			}
 		}
 	}
+    if (localStorage.getItem(getAuth(player))){
+        stats = JSON.parse(localStorage.getItem(getAuth(player)));
+        var announcement = "";
+        var chatColor = "";
+        if (stats[Ss.WI] > 149){
+            announcement += "🧙‍♂️ [𝐈𝐜𝐨𝐧𝐨] "
+            chatColor = "0x000000"
+        } else if (stats[Ss.WI] > 114){
+            announcement += "🦅 [𝐄𝐥𝐢𝐭𝐞] "
+            chatColor = "0xFF8800"
+        } else if (stats[Ss.WI] > 99){
+            announcement += "🌟 [𝐄𝐬𝐭𝐫𝐞𝐥𝐥𝐚] "
+            chatColor = "0x11FF00"
+        } else if (stats[Ss.WI] > 84){
+            announcement += "🎖️ [𝐃𝐢𝐬𝐭𝐢𝐧𝐠𝐮𝐢𝐝𝐨] "
+            chatColor = "0x003CFF"
+        } else if (stats[Ss.WI] > 64){
+            announcement += "💥 [𝐕𝐞𝐭𝐞𝐫𝐚𝐧𝐨] "
+            chatColor = "0xFF0000"
+        } else if (stats[Ss.WI] > 49){
+            announcement += "👾 [𝐃𝐢𝐚𝐦𝐚𝐧𝐭𝐞] "
+            chatColor = "0xB508FF"
+        } else if (stats[Ss.WI] > 34){
+            announcement += "🏅 [𝐎𝐫𝐨] "
+            chatColor = "0xE2B707"
+        } else if (stats[Ss.WI] > 19){
+            announcement += "🥈 [𝐏𝐥𝐚𝐭𝐚] "
+            chatColor = "0xBABABA"
+        } else if (stats[Ss.WI] > 4){
+            announcement += "🥉 [𝐁𝐫𝐨𝐧𝐜𝐞] "
+            chatColor = "0xFFFFFF"
+        } else {
+            announcement += "👋🏼 [𝐍𝐨𝐯𝐚𝐭𝐨] "
+            chatColor = "0x00FF70"
+        }
+        var playerRole = JSON.parse(localStorage.getItem(getAuth(player)))[Ss.RL];
+        if (playerRole == "vip"){
+            announcement += "「💎𝚅𝚒𝚙」";
+            chatColor = "0x00B4FF";
+        }
+        if (playerRole === "admin") {
+            announcement += "[Admin] ";
+            chatColor = "0xFFEC00"; // Color para el rol de admin 
+        } else if (playerRole === "master") {
+                   announcement += "[Maestro] ";
+                   chatColor = "0x00F7FF"; // Color para el rol de master 
+        }
+        console.log(announcement + " " + player.name + ": " + originalMessage)
+		announcement += player.name + ": " + originalMessage;
+        room.sendAnnouncement(announcement, null, chatColor);
+        return false;   
+    }   
 }
 
 room.onPlayerActivity = function(player) {
@@ -1434,6 +1778,9 @@ room.onStadiumChange = function(newStadiumName, byPlayer) {
 room.onGameTick = function() {
 	    PublicitaDiscord();
 		PublicitaDonacion();
+		PublicitaHelp();
+        PublicitaLiga();
+		PublicitaLiga2();
 	checkTime();
 	getLastTouchOfTheBall();
 	getStats();
