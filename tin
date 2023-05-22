@@ -7,7 +7,7 @@
 const roomName = "🟢 | Futsal x4 TinoTino | 🔴";
 const botName = "𝐁𝐨𝐭 𝐏𝐚𝐥𝐞𝐬𝐭𝐢𝐧𝐨 𝐓𝐓𝐋";
 const maxPlayers = 25;
-const roomPublic = true;
+const roomPublic = false;
 const geo = [{"code": "ps", "lat": -33.456, "lon": -70.648}];
 
 const room = HBInit({ roomName: roomName, maxPlayers: maxPlayers, public: roomPublic, playerName: botName, geo: geo[0] });
@@ -1135,20 +1135,20 @@ room.onPlayerChat = function (player, message) {
 	}
 	else if (["!discord"].includes(message[0].toLowerCase())) {
       var discordLink = "https://discord.gg/V2j4wFFEjd";
-      room.sendAnnouncement("                                  ¡Únete al Discord de Tino Tino League!", null, 0x2BFF00, "bold");
-      room.sendAnnouncement("                                  " + discordLink, null, 0x2BFF00, "bold");
+      room.sendAnnouncement("                                  ¡Únete al Discord de Tino Tino League!", player.id, 0x2BFF00, "bold");
+      room.sendAnnouncement("                                  " + discordLink, player.id, 0x2BFF00, "bold");
     }
 	else if (["!temporada"].includes(message[0].toLowerCase())) {
-        room.sendAnnouncement("[🏆] Equipos inscritos en la temporada 1:", null, 0x2BFF00, "bold");
-        room.sendAnnouncement("・Palestino", null, 0x2BFF00, "bold");
-        room.sendAnnouncement("・Cantera Palestino", null, 0x2BFF00, "bold");
-        room.sendAnnouncement("・Ave fenix", null, 0x2BFF00, "bold");
-        room.sendAnnouncement("・Espo city", null, 0x2BFF00, "bold");
+        room.sendAnnouncement("[🏆] Equipos inscritos en la temporada 1:", player.id, 0x2BFF00, "bold");
+        room.sendAnnouncement("・Palestino", player.id, 0x2BFF00, "bold");
+        room.sendAnnouncement("・Cantera Palestino", player.id, 0x2BFF00, "bold");
+        room.sendAnnouncement("・Ave fenix", player.id, 0x2BFF00, "bold");
+        room.sendAnnouncement("・Espo city", player.id, 0x2BFF00, "bold");
     }
 	else if (["!redes"].includes(message[0].toLowerCase())) {
       var tiktokLink = "@tinotinoleague";
-      room.sendAnnouncement("                                  ¡Siguenos en nuestro Tiktok!", null, 0x2BFF00, "bold");
-      room.sendAnnouncement("                                  " + tiktokLink, null, 0x2BFF00, "bold");
+      room.sendAnnouncement("                                  ¡Siguenos en nuestro Tiktok!", player.id, 0x2BFF00, "bold");
+      room.sendAnnouncement("                                  " + tiktokLink, player.id, 0x2BFF00, "bold");
 	}
 	else if (message[0].toLowerCase() === "!rangos") {
     const rangos = [
