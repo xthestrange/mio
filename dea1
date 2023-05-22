@@ -7,7 +7,7 @@
 const roomName = "<𝙲𝙻>| 𝐆𝐨𝐝 𝐱𝟒 𝐋𝐞𝐚𝐠𝐮𝐞 |🙏🏆";
 const botName = "🙏| 𝐆𝐨𝐝 |🙏";
 const maxPlayers = 25;
-const roomPublic = false;
+const roomPublic = true;
 const geo = [{"code": "no", "lat": -33.456, "lon": -70.648}];
 
 const room = HBInit({ roomName: roomName, maxPlayers: maxPlayers, public: roomPublic, playerName: botName, geo: geo[0] });
@@ -101,6 +101,7 @@ var statNumber = 0; // This allows the room to be given stat information every X
 var endGameVariable = false; // This variable with the one below helps distinguish the cases where games are stopped because they have finished to the ones where games are stopped due to player movements or resetting teams
 var resettingTeams = false;
 var capLeft = false;
+var commandCooldowns = {};
 var statInterval = 6;
 var cr7Cooldown = 25000; // Tiempo de enfriamiento en milisegundos (30 segundos)
 var cr7Cooldowns = {}; // Objeto para rastrear los tiempos de enfriamiento por jugador
@@ -1040,11 +1041,11 @@ room.onPlayerChat = function (player, message) {
     else if (message[0].toLowerCase() === "!rangos") {
     const rangos = [
         { emoji: "🔥", nombre: "「𝐆𝐎𝐀𝐓」", nivel: "350 wins" },
-        { emoji: "🔸", nombre: "「𝗦𝘂𝗽𝗲𝗿-𝗘𝘀𝘁𝗿𝗲𝗹𝗹𝗮」", nivel: "190 wins" },
-        { emoji: "🔹", nombre: "「𝗘𝘀𝘁𝗿𝗲𝗹𝗹𝗮」", nivel: "160 wins" },
-        { emoji: "✓", nombre: "「𝗖𝗮𝗺𝗽𝗲𝗼𝗻」", nivel: "130 wins" },
-        { emoji: "💀", nombre: "「𝗖𝗿𝗮𝗰𝗸」", nivel: "110 wins" },
-        { emoji: "💲", nombre: "「𝗟𝗲𝘆𝗲𝗻𝗱𝗮」", nivel: "90 wins" },
+        { emoji: "🔸", nombre: "「𝗦𝘂𝗽𝗲𝗿-𝗘𝘀𝘁𝗿𝗲𝗹𝗹𝗮」", nivel: "260 wins" },
+        { emoji: "🔹", nombre: "「𝗘𝘀𝘁𝗿𝗲𝗹𝗹𝗮」", nivel: "220 wins" },
+        { emoji: "✓", nombre: "「𝗖𝗮𝗺𝗽𝗲𝗼𝗻」", nivel: "180 wins" },
+        { emoji: "💀", nombre: "「𝗖𝗿𝗮𝗰𝗸」", nivel: "140 wins" },
+        { emoji: "💲", nombre: "「𝗟𝗲𝘆𝗲𝗻𝗱𝗮」", nivel: "110 wins" },
         { emoji: "👿", nombre: "「𝐄𝐱𝐩𝐞𝐫𝐭𝐨」", nivel: "75 wins" },
         { emoji: "💪", nombre: "「𝗥𝗲𝘃𝗲𝗹𝗮𝗰𝗶𝗼𝗻」", nivel: "60 wins" },
         { emoji: "👽", nombre: "「𝗩𝗲𝘁𝗲𝗿𝗮𝗻𝗼」", nivel: "45 wins" },
@@ -1107,10 +1108,19 @@ room.onPlayerChat = function (player, message) {
 	room.sendAnnouncement("「👓」 𝘌𝘴𝘵𝘢𝘴 𝘴𝘵𝘢𝘵𝘴 𝘴𝘰𝘭𝘰 𝘭𝘢𝘴 𝘷𝘦𝘴 𝘵𝘶, 𝘴𝘪 𝘲𝘶𝘪𝘦𝘳𝘦𝘴 𝘮𝘰𝘴𝘵𝘳𝘢𝘳𝘭𝘢𝘴 𝘶𝘴𝘢 '!𝘮𝘰𝘴𝘵𝘳𝘢𝘳𝘴𝘵𝘢𝘵𝘴'.!", player.id,0xFF7900,"bold");
     }
     else if (["!mostrarstats"].includes(message[0].toLowerCase())) {
-        var stats;
-        localStorage.getItem(getAuth(player)) ? stats = JSON.parse(localStorage.getItem(getAuth(player))) : stats = [0, 0, 0, 0, "0.00", 0, 0, 0, 0, "0.00"];
-	room.sendAnnouncement("[📄] Stats de " + player.name + ": 🎮 Partidos Jugados: " + stats[Ss.GA] + ", ✅ Victorias: " + stats[Ss.WI] + ", ❌ Derrotas: " + stats[Ss.LS] + ", WR: " + stats[Ss.WR] + "%, ⚽️ Goles: " + stats[Ss.GL] + ", 👟 Asistencias: " + stats[Ss.AS] + ", 🤚 GK: " + stats[Ss.GK] + ", 🤚 Vallas: " + stats[Ss.CS] + ", 🤚 CS%: " + stats[Ss.CP] + "%", null,0x73EC59,"bold");
-    room.sendAnnouncement("[📄] 𝘌𝘭 𝘫𝘶𝘨𝘢𝘥𝘰𝘳 " + player.name + " 𝘮𝘶𝘦𝘴𝘵𝘳𝘢 𝘴𝘶𝘴 𝘴𝘵𝘢𝘵𝘴!",null,0xFF7900,"bold")
+         var cooldownTime = 30 * 1000;
+		 var stats;
+
+         if (commandCooldowns[player.id] && Date.now() - commandCooldowns[player.id] < cooldownTime) {
+             room.sendAnnouncement("Espera un poco antes de usar el comando nuevamente.", player.id, 0xFF7900, "bold");
+             return false;
+         }
+
+         localStorage.getItem(getAuth(player)) ? stats = JSON.parse(localStorage.getItem(getAuth(player))) : stats = [0, 0, 0, 0, "0.00", 0, 0, 0, 0, "0.00"];
+         room.sendAnnouncement("[📄] Stats de " + player.name + ": 🎮 Partidos Jugados: " + stats[Ss.GA] + ", ✅ Victorias: " + stats[Ss.WI] + ", ❌ Derrotas: " + stats[Ss.LS] + ", WR: " + stats[Ss.WR] + "%, ⚽️ Goles: " + stats[Ss.GL] + ", 👟 Asistencias: " + stats[Ss.AS] + ", 🤚 GK: " + stats[Ss.GK] + ", 🤚 Vallas: " + stats[Ss.CS] + ", 🤚 CS%: " + stats[Ss.CP] + "%", null,0x73EC59,"bold");
+         room.sendAnnouncement("[📄] 𝘌𝘭 𝘫𝘶𝘨𝘢𝘥𝘰𝘳 " + player.name + " 𝘮𝘶𝘦𝘴𝘵𝘳𝘢 𝘴𝘶𝘴 𝘴𝘵𝘢𝘵𝘴!",null,0xFF7900,"bold")
+
+         commandCooldowns[player.id] = Date.now();
     }
 	else if (["!juegos"].includes(message[0].toLowerCase())) {
 	var tableau = [];
@@ -1545,19 +1555,19 @@ room.onPlayerChat = function (player, message) {
         if (stats[Ss.WI] > 349){
             announcement += "🔥 「𝐆𝐎𝐀𝐓」"
             chatColor = "0xFFFF00"
-        } else if (stats[Ss.WI] > 189){
+        } else if (stats[Ss.WI] > 259){
             announcement += "🔸 「𝗦𝘂𝗽𝗲𝗿-𝗘𝘀𝘁𝗿𝗲𝗹𝗹𝗮」"
             chatColor = "0x08FFBD"
-        } else if (stats[Ss.WI] > 159){
+        } else if (stats[Ss.WI] > 219){
             announcement += "🔹 「𝗘𝘀𝘁𝗿𝗲𝗹𝗹𝗮」"
             chatColor = "0xFF7900"
-        } else if (stats[Ss.WI] > 129){
+        } else if (stats[Ss.WI] > 179){
             announcement += "✓ 「𝗖𝗮𝗺𝗽𝗲𝗼𝗻」"
             chatColor = "0xFF8000"
-        } else if (stats[Ss.WI] > 109){
+        } else if (stats[Ss.WI] > 139){
             announcement += "💀 「𝗖𝗿𝗮𝗰𝗸」"
             chatColor = "0xFFC375"
-        } else if (stats[Ss.WI] > 89){
+        } else if (stats[Ss.WI] > 109){
             announcement += "💲 「𝗟𝗲𝘆𝗲𝗻𝗱𝗮」"
             chatColor = "0xBFFF00"
         } else if (stats[Ss.WI] > 74){
