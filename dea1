@@ -4,10 +4,10 @@
 
 /* ROOM */
 
-const roomName = "🏆🙏| 𝐆𝐨𝐝 𝐱𝟒 𝐋𝐞𝐚𝐠𝐮𝐞 |🙏🏆";
+const roomName = "<𝙲𝙻>| 𝐆𝐨𝐝 𝐱𝟒 𝐋𝐞𝐚𝐠𝐮𝐞 |🙏🏆";
 const botName = "🙏| 𝐆𝐨𝐝 |🙏";
 const maxPlayers = 25;
-const roomPublic = true;
+const roomPublic = false;
 const geo = [{"code": "no", "lat": -33.456, "lon": -70.648}];
 
 const room = HBInit({ roomName: roomName, maxPlayers: maxPlayers, public: roomPublic, playerName: botName, geo: geo[0] });
@@ -200,7 +200,7 @@ function useTulaCommand(player) {
 
 function PublicitaDiscord(player) {
     var scores = room.getScores();
-    if (scores.time > 60 && !isTimeAddedShownseis) {
+    if (scores.time > 180 && !isTimeAddedShownseis) {
     room.sendAnnouncement("                                        ▒█▀▀▄ ▀█▀ ▒█▀▀▀█ ▒█▀▀█ ▒█▀▀▀█ ▒█▀▀█ ▒█▀▀▄ ", null, 0xffcd2c, "bold")
     room.sendAnnouncement("                                        ▒█░▒█ ▒█░ ░▀▀▀▄▄ ▒█░░░ ▒█░░▒█ ▒█▄▄▀ ▒█░▒█ ", null, 0xea8f73, "bold")
     room.sendAnnouncement("                                        ▒█▄▄▀ ▄█▄ ▒█▄▄▄█ ▒█▄▄█ ▒█▄▄▄█ ▒█░▒█ ▒█▄▄▀ ", null, 0xd757b3, "bold");
@@ -219,7 +219,7 @@ function PublicitaDonacion(player) {
 
 function PublicitaHelp(player) {
     var scores = room.getScores();
-    if (scores.time > 20 && !isTimeAddedShowncinco) {
+    if (scores.time > 30 && !isTimeAddedShowncinco) {
     room.sendAnnouncement("「📣」 ¡𝗨𝘀𝗮 '!𝗮𝘆𝘂𝗱𝗮' 𝗽𝗮𝗿𝗮 𝘃𝗲𝗿 𝗹𝗮 𝗹𝗶𝘀𝘁𝗮 𝗱𝗲 𝗰𝗼𝗺𝗮𝗻𝗱𝗼𝘀 𝗱𝗶𝘀𝗽𝗼𝗻𝗶𝗯𝗹𝗲𝘀!", player, 0xFFA200, "bold");
     isTimeAddedShowncinco = true;
     }
@@ -227,7 +227,7 @@ function PublicitaHelp(player) {
 
 function PublicitaLiga(player) {
     var scores = room.getScores();
-    if (scores.time > 180 && !isTimeAddedShowncuatro) {
+    if (scores.time > 60 && !isTimeAddedShowncuatro) {
     room.sendAnnouncement("「📣」 𝐓𝐞𝐧𝐞𝐦𝐨𝐬 𝐮𝐧 𝐬𝐞𝐫𝐯𝐞𝐫 𝐝𝐞 𝐝𝐢𝐬𝐜𝐨𝐫𝐝 𝐩𝐚𝐫𝐚 𝐥𝐚 𝐜𝐨𝐦𝐮𝐧𝐢𝐝𝐚𝐝. 𝗠𝗮𝘀 𝗶𝗻𝗳𝗼𝗿𝗺𝗮𝗰𝗶𝗼𝗻 𝘂𝘀𝗮𝗻𝗱𝗼 '!𝗱𝗶𝘀𝗰𝗼𝗿𝗱'", player, 0xFFA200, "bold");
     isTimeAddedShowncuatro = true;
     }
@@ -1034,8 +1034,8 @@ room.onPlayerChat = function (player, message) {
 }
 	else if (["!discord"].includes(message[0].toLowerCase())) {
       var discordLink = "https://discord.gg/gPhuf9CF";
-      room.sendAnnouncement("                                  ¡Únete a nuestro servidor de Discord!", null, 0xFFA200, "bold");
-      room.sendAnnouncement("                                  " + discordLink, null, 0xFFA200, "bold");
+      room.sendAnnouncement("                                  ¡Únete a nuestro servidor de Discord!", player.id, 0xFFA200, "bold");
+      room.sendAnnouncement("                                  " + discordLink, player.id, 0xFFA200, "bold");
     }
     else if (message[0].toLowerCase() === "!rangos") {
     const rangos = [
@@ -1149,7 +1149,7 @@ room.onPlayerChat = function (player, message) {
     else if (["!goats"].includes(message[0].toLowerCase())) {
 	var tableau = [];
 	try{
-	Object.keys(localStorage).forEach(function (key) { if (!["player_name", "view_mode", "geo", "avatar", "player_auth_key"].includes(key) && JSON.parse(localStorage.getItem(key))[Ss.WI] > 400) { tableau.push([(JSON.parse(localStorage.getItem(key))[Ss.NK]), (JSON.parse(localStorage.getItem(key))[Ss.WI])]); } });
+	Object.keys(localStorage).forEach(function (key) { if (!["player_name", "view_mode", "geo", "avatar", "player_auth_key"].includes(key) && JSON.parse(localStorage.getItem(key))[Ss.WI] > 349) { tableau.push([(JSON.parse(localStorage.getItem(key))[Ss.NK]), (JSON.parse(localStorage.getItem(key))[Ss.WI])]); } });
 	}
 	catch{
 
@@ -1542,25 +1542,25 @@ room.onPlayerChat = function (player, message) {
         stats = JSON.parse(localStorage.getItem(getAuth(player)));
         var announcement = "";
         var chatColor = "";
-        if (stats[Ss.WI] > 399){
+        if (stats[Ss.WI] > 349){
             announcement += "🔥 「𝐆𝐎𝐀𝐓」"
             chatColor = "0xFFFF00"
-        } else if (stats[Ss.WI] > 199){
+        } else if (stats[Ss.WI] > 189){
             announcement += "🔸 「𝗦𝘂𝗽𝗲𝗿-𝗘𝘀𝘁𝗿𝗲𝗹𝗹𝗮」"
             chatColor = "0x08FFBD"
-        } else if (stats[Ss.WI] > 179){
+        } else if (stats[Ss.WI] > 159){
             announcement += "🔹 「𝗘𝘀𝘁𝗿𝗲𝗹𝗹𝗮」"
             chatColor = "0xFF7900"
-        } else if (stats[Ss.WI] > 159){
+        } else if (stats[Ss.WI] > 129){
             announcement += "✓ 「𝗖𝗮𝗺𝗽𝗲𝗼𝗻」"
             chatColor = "0xFF8000"
-        } else if (stats[Ss.WI] > 129){
+        } else if (stats[Ss.WI] > 109){
             announcement += "💀 「𝗖𝗿𝗮𝗰𝗸」"
             chatColor = "0xFFC375"
         } else if (stats[Ss.WI] > 89){
             announcement += "💲 「𝗟𝗲𝘆𝗲𝗻𝗱𝗮」"
             chatColor = "0xBFFF00"
-        } else if (stats[Ss.WI] > 69){
+        } else if (stats[Ss.WI] > 74){
             announcement += "👿 「𝐄𝐱𝐩𝐞𝐫𝐭𝐨」"
             chatColor = "0xEC77CE"
         } else if (stats[Ss.WI] > 59){
