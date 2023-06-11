@@ -7,7 +7,7 @@
 const roomName = " 🪐 | 𝙵𝚞𝚝𝚜𝚊𝚕 𝚡𝟹 ・ 𝙰𝙵𝙲𝚂 | 🪐";
 const botName = "| 𝙰𝙵𝙲𝚂 𝙱𝚘𝚝 |";
 const maxPlayers = 25;
-const roomPublic = true;
+const roomPublic = false;
 const geo = [{"code": "cl", "lat": -33.456, "lon": -70.648}];
 
 const room = HBInit({ roomName: roomName, maxPlayers: maxPlayers, public: roomPublic, playerName: botName, geo: geo[0] });
@@ -51,7 +51,7 @@ var uniforms = {
 	"pal": {
 		"name": 'Palestino',
 		"type": Uniform.COUNTRY,
-		"emoji": '⚫🔴🟡',
+		"emoji": '🔴🟢⚪',
 		"angle": 40,
 		"textcolor": 0xffffff,
 		"color1": 0x030000,
@@ -66,7 +66,7 @@ var uniforms = {
 	"cp": {
 		"name": 'Cantera CD Palestino',
 		"type": Uniform.COUNTRY,
-		"emoji": '⚪🟢🔴',
+		"emoji": '🔴🟢',
 		"angle": 90,
 		"textcolor": 0x14FF00,
 		"color1": 0x000000,
@@ -81,7 +81,7 @@ var uniforms = {
 	"esp": {
 		"name": 'Espo City',
 		"type": Uniform.COUNTRY,
-		"emoji": '🟢🟡🔵',
+		"emoji": '🟢🟡 ',
 		"angle": 120,
 		"textcolor": 0xffffff,
 		"color1": 0x22A800,
@@ -93,25 +93,10 @@ var uniforms = {
 		"color22": 0xCFC800,
 		"color23": 0xBFA500,
 	},
-	"dk": {
-		"name": 'Deportivo Kaiser',
-		"type": Uniform.COUNTRY,
-		"emoji": '🟡🟢',
-		"angle": 30,
-		"textcolor": 0xffffff,
-		"color1": 0x042566,
-		"color2": 0x052B7A,
-		"color3": 0x063391,
-		"angle2": 30,
-		"textcolor2": 0x050326,
-		"color21": 0xF2F2F2,
-		"color22": 0xEDEDED,
-		"color23": 0xE8E8E8,
-	},
 	"god": {
 		"name": 'God FC',
 		"type": Uniform.COUNTRY,
-		"emoji": '🟡🟢',
+		"emoji": '🟠⚪',
 		"angle": 60,
 		"textcolor": 0x0F0F0F,
 		"color1": 0xFFCE2E,
@@ -126,7 +111,7 @@ var uniforms = {
 	"mtl": {
 		"name": 'Mentolato FC',
 		"type": Uniform.COUNTRY,
-		"emoji": '🟡🟢',
+		"emoji": '⚫🟠',
 		"angle": 60,
 		"textcolor": 0xFFFFFF,
 		"color1": 0xB5340D,
@@ -141,7 +126,7 @@ var uniforms = {
 	"tul": {
 		"name": 'Los Tulachis',
 		"type": Uniform.COUNTRY,
-		"emoji": '🟡🟢',
+		"emoji": '🟢🟢',
 		"angle": 90,
 		"textcolor": 0xFFFFFF,
 		"color1": 0x48FF24,
@@ -156,7 +141,7 @@ var uniforms = {
 	"pms": {
 		"name": 'Palmeiras',
 		"type": Uniform.COUNTRY,
-		"emoji": '🟡🟢',
+		"emoji": '🟢⚪🟢',
 		"angle": 60,
 		"textcolor": 0xFCFDFC,
 		"color1": 0x006134,
@@ -168,10 +153,10 @@ var uniforms = {
 		"color22": 0x000000,
 		"color23": 0x000000,
 	},
-	"ltr": {
+	"trn": {
 		"name": 'Los Tourinos F.C',
 		"type": Uniform.COUNTRY,
-		"emoji": '🟡🟢',
+		"emoji": '🟤⚫',
 		"angle": 60,
 		"textcolor": 0x4A1E00,
 		"color1": 0x000000,
@@ -182,6 +167,36 @@ var uniforms = {
 		"color21": 0x301300,
 		"color22": 0x301300,
 		"color23": 0x301300,
+	},
+	"ns": {
+		"name": 'Nápoles',
+		"type": Uniform.COUNTRY,
+		"emoji": '⚪🔵⚪',
+		"angle": 0,
+		"textcolor": 0xFFFFFF,
+		"color1": 0x00B3FF,
+		"color2": 0x00B3FF,
+		"color3": 0x00B3FF,
+		"angle2": 0,
+		"textcolor2": 0xFF4545,
+		"color21": 0xFFFFFF,
+		"color22": 0xFFFFFF,
+		"color23": 0xFFFFFF,
+	},
+	"bha": {
+		"name": 'Brighton',
+		"type": Uniform.COUNTRY,
+		"emoji": '⚪🔵',
+		"angle": 0,
+		"textcolor": 0xFFBB00,
+		"color1": 0x0054C6,
+		"color2": 0xFFFFFF,
+		"color3": 0x0054C6,
+		"angle2": 0,
+		"textcolor2": 0x000000,
+		"color21": 0xFF640A,
+		"color22": 0xE83F0C,
+		"color23": null,
 	},
 
 	/* ESTANDAR */
@@ -222,11 +237,13 @@ var nameHome = 'Rojo';
 var acronymHome = "red";
 var nameGuest = 'Azul';
 var acronymGuest = "blu";
-var emojiHome = '🔵⚪🔵';
-var emojiGuest = '🟡🟢';
-var afkLimit = 12;
+var emojiHome = '🔴🔴';
+var emojiGuest = '🔵🔵';
+var goalsHome = [];
+var goalsGuest = [];
+var afkLimit = Infinity;
 var drawTimeLimit = Infinity;
-var maxTeamSize = 3; // This works for 1 (you might want to adapt things to remove some useless stats in 1v1 like assist or cs), 2, 3 or 4
+var maxTeamSize = 4; // This works for 1 (you might want to adapt things to remove some useless stats in 1v1 like assist or cs), 2, 3 or 4
 var slowMode = 0;
 
 room.setTeamColors(1, uniforms[acronymHome].angle, uniforms[acronymHome].textcolor, [uniforms[acronymHome].color1, uniforms[acronymHome].color2, uniforms[acronymHome].color3]);
@@ -1173,7 +1190,6 @@ room.onPlayerChat = function (player, message) {
         room.sendAnnouncement("[🏆] Equipos inscritos en la temporada 1:", player.id, 0xFFFFFF, "bold");
         room.sendAnnouncement("     ・Palestino", player.id, 0x11FF00, "bold");
         room.sendAnnouncement("     ・Cantera Palestino", player.id, 0x097001, "bold");
-        room.sendAnnouncement("     ・Deportivo Kaise", player.id, 0x0800FF, "bold");
         room.sendAnnouncement("     ・Espo city", player.id, 0xC2F23D, "bold");
 		room.sendAnnouncement("     ・God FC", player.id, 0xFFA200, "bold");
         room.sendAnnouncement("     ・Mentolato FC", player.id, 0x007341, "bold");
@@ -1998,6 +2014,7 @@ room.onGameTick = function() {
         PublicitaDonacion();
         PublicitaHelp();
         PublicitaLiga();
+		PublicitaLiga2();
 	checkTime();
 	getLastTouchOfTheBall();
 	getStats();
