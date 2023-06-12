@@ -7,7 +7,7 @@
 const roomName = " 🪐 | 𝙵𝚞𝚝𝚜𝚊𝚕 𝚡𝟹 ・ 𝙰𝙵𝙲𝚂 | 🪐";
 const botName = "| 𝙰𝙵𝙲𝚂 𝙱𝚘𝚝 |";
 const maxPlayers = 25;
-const roomPublic = false;
+const roomPublic = true;
 const geo = [{"code": "cl", "lat": -33.456, "lon": -70.648}];
 
 const room = HBInit({ roomName: roomName, maxPlayers: maxPlayers, public: roomPublic, playerName: botName, geo: geo[0] });
@@ -198,6 +198,36 @@ var uniforms = {
 		"color22": 0xE83F0C,
 		"color23": null,
 	},
+	"tvli": {
+		"name": 'Talibanes',
+		"type": Uniform.COUNTRY,
+		"emoji": '⚫🟡⚪',
+		"angle": 0,
+		"textcolor": 0xFFFF38,
+		"color1": 0x000000,
+		"color2": 0x000000,
+		"color3": 0x000000,
+		"angle2": 0,
+		"textcolor2": 0x0A0A02,
+		"color21": 0xFFFFFF,
+		"color22": 0xFFFFFF,
+		"color23": 0xFFFFFF,
+	},
+	"pie": {
+		"name": 'FC Pierola',
+		"type": Uniform.COUNTRY,
+		"emoji": '⚫🔴⚪',
+		"angle": 60,
+		"textcolor": 0xFFFFFF,
+		"color1": 0x002033,
+		"color2": 0xA61505,
+		"color3": 0x002033,
+		"angle2": 60,
+		"textcolor2": 0x000000,
+		"color21": 0xFFFFFF,
+		"color22": 0xE6E6E6,
+		"color23": null,
+	},
 
 	/* ESTANDAR */
 		"red": {
@@ -241,9 +271,9 @@ var emojiHome = '🔴🔴';
 var emojiGuest = '🔵🔵';
 var goalsHome = [];
 var goalsGuest = [];
-var afkLimit = Infinity;
+var afkLimit = 12;
 var drawTimeLimit = Infinity;
-var maxTeamSize = 4; // This works for 1 (you might want to adapt things to remove some useless stats in 1v1 like assist or cs), 2, 3 or 4
+var maxTeamSize = 3; // This works for 1 (you might want to adapt things to remove some useless stats in 1v1 like assist or cs), 2, 3 or 4
 var slowMode = 0;
 
 room.setTeamColors(1, uniforms[acronymHome].angle, uniforms[acronymHome].textcolor, [uniforms[acronymHome].color1, uniforms[acronymHome].color2, uniforms[acronymHome].color3]);
@@ -380,7 +410,7 @@ function PublicitaDiscord(player) {
 function PublicitaDonacion(player) {
     var scores = room.getScores();
     if (scores.time > 120 && !isTimeAddedShownsiete) {
-    room.sendAnnouncement("「📣」 𝐄𝐥 𝟏𝟎 𝐝𝐞 𝐉𝐮𝐧𝐢𝐨 𝐜𝐨𝐦𝐢𝐞𝐧𝐳𝐚 𝐥𝐚 𝐩𝐫𝐞-𝐭𝐞𝐦𝐩𝐨𝐫𝐚𝐝𝐚 𝐞𝐧 𝐀𝐅𝐂𝐒, ¡𝐕𝐞 𝐚 𝐢𝐧𝐬𝐜𝐫𝐢𝐛𝐢𝐫𝐭𝐞 𝐜𝐨𝐧 𝐭𝐮 𝐞𝐪𝐮𝐢𝐩𝐨 𝐞𝐧 𝐧𝐮𝐞𝐬𝐭𝐫𝐨 𝐝𝐢𝐬𝐜𝐨𝐫𝐝!", player, 0xFFFFFF, "bold");
+    room.sendAnnouncement("「📣」 𝐒𝐞 𝐞𝐬𝐭𝐚 𝐣𝐮𝐠𝐚𝐧𝐝𝐨 𝐥𝐚 𝐂𝐨𝐩𝐚 𝐝𝐞 𝐩𝐫𝐞𝐭𝐞𝐦𝐩𝐨𝐫𝐚𝐝𝐚 𝐞𝐧 𝐀𝐅𝐂𝐒, ¡𝐕𝐞 𝐚 𝐢𝐧𝐬𝐜𝐫𝐢𝐛𝐢𝐫𝐭𝐞 𝐩𝐚𝐫𝐚 𝐥𝐚 𝐥𝐢𝐠𝐚 𝐜𝐨𝐧 𝐭𝐮 𝐞𝐪𝐮𝐢𝐩𝐨 𝐞𝐧 𝐧𝐮𝐞𝐬𝐭𝐫𝐨 𝐝𝐢𝐬𝐜𝐨𝐫𝐝!", player, 0xFFFFFF, "bold");
     isTimeAddedShownsiete = true;
     }
 }
