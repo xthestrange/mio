@@ -210,7 +210,7 @@ var uniforms = {
 		"color22": 0xFFFFFF,
 		"color23": 0xFFFFFF,
 	},
-	"pie": {
+	"fcp": {
 		"name": 'FC Pierola',
 		"type": Uniform.COUNTRY,
 		"emoji": '⚫🔴⚪',
@@ -224,6 +224,21 @@ var uniforms = {
 		"color21": 0xFFFFFF,
 		"color22": 0xE6E6E6,
 		"color23": null,
+	},
+	"can": {
+		"name": 'Club Atletico Nuram',
+		"type": Uniform.COUNTRY,
+		"emoji": '⚪🟠⚫',
+		"angle": 0,
+		"textcolor": 0x000000,
+		"color1": 0xFFFFFF,
+		"color2": 0xFF7B08,
+		"color3": 0xFFFFFF,
+		"angle2": 0,
+		"textcolor2": 0xC75D00,
+		"color21": 0x171616,
+		"color22": 0xC2C2C2,
+		"color23": 0x171616,
 	},
 
 	/* ESTANDAR */
