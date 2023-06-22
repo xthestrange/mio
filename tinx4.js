@@ -373,7 +373,7 @@ function PublicitaDiscord(player) {
 function PublicitaDonacion(player) {
     var scores = room.getScores();
     if (scores.time > 120 && !isTimeAddedShownsiete) {
-    room.sendAnnouncement("「📣」 𝐒𝐞 𝐞𝐬𝐭𝐚 𝐣𝐮𝐠𝐚𝐧𝐝𝐨 𝐥𝐚 𝐂𝐨𝐩𝐚 𝐝𝐞 𝐩𝐫𝐞𝐭𝐞𝐦𝐩𝐨𝐫𝐚𝐝𝐚 𝐞𝐧 𝐀𝐅𝐂𝐒, ¡𝐕𝐞 𝐚 𝐢𝐧𝐬𝐜𝐫𝐢𝐛𝐢𝐫𝐭𝐞 𝐩𝐚𝐫𝐚 𝐥𝐚 𝐥𝐢𝐠𝐚 𝐜𝐨𝐧 𝐭𝐮 𝐞𝐪𝐮𝐢𝐩𝐨 𝐞𝐧 𝐧𝐮𝐞𝐬𝐭𝐫𝐨 𝐝𝐢𝐬𝐜𝐨𝐫𝐝!", player, 0xFFFFFF, "bold");
+    room.sendAnnouncement("「📣」 ¡𝐕𝐞 𝐚 𝐢𝐧𝐬𝐜𝐫𝐢𝐛𝐢𝐫𝐭𝐞 𝐩𝐚𝐫𝐚 𝐥𝐚 𝐥𝐢𝐠𝐚 𝐜𝐨𝐧 𝐭𝐮 𝐞𝐪𝐮𝐢𝐩𝐨 𝐞𝐧 𝐧𝐮𝐞𝐬𝐭𝐫𝐨 𝐝𝐢𝐬𝐜𝐨𝐫𝐝 𝐨𝐟𝐢𝐜𝐢𝐚𝐥!", player, 0xFFFFFF, "bold");
     isTimeAddedShownsiete = true;
     }
 }
