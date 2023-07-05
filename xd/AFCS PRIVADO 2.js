@@ -4,7 +4,7 @@
 
 /* ROOM */
 
-const roomName = " 🪐 | 𝙷𝚘𝚜𝚝 𝚙𝚛𝚒𝚟𝚊𝚍𝚘 2 𝙰𝙵𝙲𝚂 | 🪐";
+const roomName = " 🪐 | 𝚂𝚊𝚕𝚊 2 𝙰𝙵𝙲𝚂 | 🪐";
 const botName = "| 𝙰𝙵𝙲𝚂 𝙰𝚛𝚋𝚒𝚝𝚛𝚘 |";
 const maxPlayers = 25;
 const roomPublic = false;
@@ -17,7 +17,7 @@ var roomWebhook = 'https://discord.com/api/webhooks/1117242525107900416/yVtXIgQF
 const scoreLimitClassic = 4;
 const scoreLimitBig = 0;
 const timeLimitClassic = 3;
-const timeLimitBig = 8;
+const timeLimitBig = 14;
 
 const Uniform = { COUNTRY: 0, CLUBLA: 1 };
 
@@ -60,20 +60,20 @@ var uniforms = {
 		"color22": 0x313302,
 		"color23": 0x000000,
 	},
-	"cp": {
-		"name": 'Cantera Palestino',
+	"sh": {
+		"name": 'Shishiboss H.C',
 		"type": Uniform.COUNTRY,
 		"emoji": '🔴🟢',
-		"angle": 90,
-		"textcolor": 0x14FF00,
+		"angle": 60,
+		"textcolor": 0xFFFDFC,
 		"color1": 0x000000,
-		"color2": 0x136602,
+		"color2": 0xD4AE5A,
 		"color3": 0x000000,
-		"angle2": 230,
-		"textcolor2": 0xFF0000,
-		"color21": 0x000000,
-		"color22": 0x3D0000,
-		"color23": 0xC40000,
+		"angle2": 60,
+		"textcolor2": 0x000000,
+		"color21": 0xD4AE5A,
+		"color22": 0xFFFAFA,
+		"color23": 0xD4AE5A,
 	},
 	"esp": {
 		"name": 'Espo City',
@@ -120,81 +120,6 @@ var uniforms = {
 		"color22": 0xFFF7F7,
 		"color23": 0xFFF7F7,
 	},
-	"tul": {
-		"name": 'Los Tulachis',
-		"type": Uniform.COUNTRY,
-		"emoji": '🟢🟢',
-		"angle": 90,
-		"textcolor": 0xFFFFFF,
-		"color1": 0x48FF24,
-		"color2": 0x2EFF82,
-		"color3": null,
-		"angle2": 90,
-		"textcolor2": 0xFFFFFF,
-		"color21": 0x000000,
-		"color22": 0x00770C,
-		"color23": null,
-	},
-	"pms": {
-		"name": 'Palmeiras',
-		"type": Uniform.COUNTRY,
-		"emoji": '🟢⚪🟢',
-		"angle": 60,
-		"textcolor": 0xFCFDFC,
-		"color1": 0x006134,
-		"color2": 0x006134,
-		"color3": 0x006134,
-		"angle2": 0,
-		"textcolor2": 0x006134,
-		"color21": 0x000000,
-		"color22": 0x000000,
-		"color23": 0x000000,
-	},
-	"trn": {
-		"name": 'Los Tourinos F.C',
-		"type": Uniform.COUNTRY,
-		"emoji": '🟤⚫',
-		"angle": 60,
-		"textcolor": 0x4A1E00,
-		"color1": 0x000000,
-		"color2": 0x000000,
-		"color3": 0x000000,
-		"angle2": 60,
-		"textcolor2": 0x919090,
-		"color21": 0x301300,
-		"color22": 0x301300,
-		"color23": 0x301300,
-	},
-	"ns": {
-		"name": 'Nápoles',
-		"type": Uniform.COUNTRY,
-		"emoji": '⚪🔵⚪',
-		"angle": 0,
-		"textcolor": 0xFFFFFF,
-		"color1": 0x00B3FF,
-		"color2": 0x00B3FF,
-		"color3": 0x00B3FF,
-		"angle2": 0,
-		"textcolor2": 0xFF4545,
-		"color21": 0xFFFFFF,
-		"color22": 0xFFFFFF,
-		"color23": 0xFFFFFF,
-	},
-	"bha": {
-		"name": 'Brighton',
-		"type": Uniform.COUNTRY,
-		"emoji": '⚪🔵',
-		"angle": 0,
-		"textcolor": 0xFFBB00,
-		"color1": 0x0054C6,
-		"color2": 0xFFFFFF,
-		"color3": 0x0054C6,
-		"angle2": 0,
-		"textcolor2": 0x000000,
-		"color21": 0xFF640A,
-		"color22": 0xE83F0C,
-		"color23": null,
-	},
 	"tvli": {
 		"name": 'Talibanes',
 		"type": Uniform.COUNTRY,
@@ -240,11 +165,102 @@ var uniforms = {
 		"color22": 0xC2C2C2,
 		"color23": 0x171616,
 	},
+	"isc": {
+		"name": 'Ibis Sport Club',
+		"type": Uniform.COUNTRY,
+		"emoji": '🔴⚫',
+		"angle": 0,
+		"textcolor": 0xC4A233,
+		"color1": 0x960000,
+		"color2": 0x000000,
+		"color3": 0x960000,
+		"angle2": 11111,
+		"textcolor2": 0xFF0000,
+		"color21": 0xFFFFFF,
+		"color22": 0xFFFFFF,
+		"color23": 0xCCCCCC,
+	},
+	"cgod": {
+		"name": 'Cantera God FC',
+		"type": Uniform.COUNTRY,
+		"emoji": '🔵⚫',
+		"angle": 60,
+		"textcolor": 0xBFAB24,
+		"color1": 0x4E33FF,
+		"color2": 0x000000,
+		"color3": 0x242AD4,
+		"angle2": 60,
+		"textcolor2": 0xFFF240,
+		"color21": 0x5E5891,
+		"color22": 0x000000,
+		"color23": 0x545480,
+	},
+	"gsc": {
+		"name": 'Gordibis',
+		"type": Uniform.COUNTRY,
+		"emoji": '⚪🔴',
+		"angle": 50,
+		"textcolor": 0xA10000,
+		"color1": 0xFFFFFF,
+		"color2": 0xFFFFFF,
+		"color3": 0xEDEDED,
+		"angle2": 0,
+		"textcolor2": 0xC4A233,
+		"color21": 0x960000,
+		"color22": 0x000000,
+		"color23": 0x960000,
+	},
+	"cah": {
+		"name": 'Club Atletico Huracán',
+		"type": Uniform.COUNTRY,
+		"emoji": '⚪🔴⚪',
+		"angle": 60,
+		"textcolor": 0xFF122A,
+		"color1": 0xFFF7F7,
+		"color2": 0xEDE6E6,
+		"color3": 0xE3DCDC,
+		"angle2": 0,
+		"textcolor2": 0xFFFFFF,
+		"color21": 0xED213C,
+		"color22": 0xC91C34,
+		"color23": 0xED213C,
+	},
+	"ph": {
+		"name": 'Pichang Heroes',
+		"type": Uniform.COUNTRY,
+		"emoji": '⚪🟢',
+		"angle": 60,
+		"textcolor": 0x225275,
+		"color1": 0xFFFFFC,
+		"color2": 0xBAB505,
+		"color3": 0xFFFEFA,
+		"angle2": 60,
+		"textcolor2": 0x225275,
+		"color21": 0xFFFFFC,
+		"color22": 0xBAB505,
+		"color23": 0xFFFEFA,
+	},
+	"tiw": {
+		"name": 'TimberWolves HC',
+		"type": Uniform.COUNTRY,
+		"emoji": '🔵⚫',
+		"angle": 90,
+		"textcolor": 0xFFFFFF,
+		"color1": 0x004D99,
+		"color2": 0x00004A,
+		"color3": 0x00004A,
+		"angle2": 0,
+		"textcolor2": 0x004D99,
+		"color21": 0x00004A,
+		"color22": 0xFFFFFF,
+		"color23": 0xFFFFFF,
+	},
 
 	/* ESTANDAR */
 		"red": {
 		"name": 'Rojo',
 		"type": Uniform.CLUBLA,
+		"emoji": '🔴🔴',
 		"angle": 60,
 		"textcolor": 0xF2D3B3,
         "color1": 0xED8470,
@@ -259,6 +275,7 @@ var uniforms = {
 	    "blu": {
 		"name": 'Azul',
 		"type": Uniform.CLUBLA,
+		"emoji": '🔵🔵',
 		"angle": 0,
 		"textcolor": 0x1400CF,
 		"color1": 0x000000,
@@ -444,7 +461,7 @@ function docketFormat(string1, string2) {
 function PublicitaDonacion(player) {
     var scores = room.getScores();
     if (scores.time > 20 && !isTimeAddedShownsiete) {
-    room.sendAnnouncement("「📣」 𝐄𝐬𝐭𝐚𝐬 𝐣𝐮𝐠𝐚𝐧𝐝𝐨 𝐥𝐚 𝐂𝐨𝐩𝐚 𝐝𝐞 𝐏𝐫𝐞𝐭𝐞𝐦𝐩𝐨𝐫𝐚𝐝𝐚. ¡𝐁𝐮𝐞𝐧𝐚 𝐒𝐮𝐞𝐫𝐭𝐞!", player, 0xFFFFFF, "bold");
+    room.sendAnnouncement("「📣」 𝐄𝐬𝐭𝐚𝐬 𝐣𝐮𝐠𝐚𝐧𝐝𝐨 𝐥𝐚 𝐩𝐫𝐢𝐦𝐞𝐫𝐚 𝐭𝐞𝐦𝐩𝐨𝐫𝐚𝐝𝐚 𝐝𝐞 𝐀𝐅𝐂𝐒. ¡𝐁𝐮𝐞𝐧𝐚 𝐒𝐮𝐞𝐫𝐭𝐞!", player, 0xFFFFFF, "bold");
     isTimeAddedShownsiete = true;
     }
 }
