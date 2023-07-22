@@ -22,7 +22,7 @@ const scoreLimitBig = 3;
 const timeLimitClassic = 3;
 const timeLimitBig = 4;
 
-const Uniform = { COUNTRY: 0, CLUBLA: 1 };
+const Uniform = { COUNTRY: 0, CLUBLA: 1, SEGUNDA: 2 };
 
 var isTimeAddedShown = false;
 var isTimeAddedShowndos = false;
@@ -66,7 +66,7 @@ var uniforms = {
 	"sh": {
 		"name": 'Shishiboss H.C',
 		"type": Uniform.COUNTRY,
-		"emoji": '🔴🟢',
+		"emoji": '🟤⚫⚪',
 		"angle": 60,
 		"textcolor": 0xFFFDFC,
 		"color1": 0x000000,
@@ -77,21 +77,6 @@ var uniforms = {
 		"color21": 0xD4AE5A,
 		"color22": 0xFFFAFA,
 		"color23": 0xD4AE5A,
-	},
-	"esp": {
-		"name": 'Espo City',
-		"type": Uniform.COUNTRY,
-		"emoji": '🟢🟡 ',
-		"angle": 120,
-		"textcolor": 0xffffff,
-		"color1": 0x22A800,
-		"color2": 0x0C7800,
-		"color3": 0x044D0B,
-		"angle2": 120,
-		"textcolor2": 0x3B3B3B,
-		"color21": 0xD4FF00,
-		"color22": 0xCFC800,
-		"color23": 0xBFA500,
 	},
 	"god": {
 		"name": 'God FC',
@@ -183,21 +168,6 @@ var uniforms = {
 		"color22": 0xFFFFFF,
 		"color23": 0xCCCCCC,
 	},
-	"cgod": {
-		"name": 'Cantera God FC',
-		"type": Uniform.COUNTRY,
-		"emoji": '🔵⚫',
-		"angle": 60,
-		"textcolor": 0xBFAB24,
-		"color1": 0x4E33FF,
-		"color2": 0x000000,
-		"color3": 0x242AD4,
-		"angle2": 60,
-		"textcolor2": 0xFFF240,
-		"color21": 0x5E5891,
-		"color22": 0x000000,
-		"color23": 0x545480,
-	},
 	"gsc": {
 		"name": 'Gordibis',
 		"type": Uniform.COUNTRY,
@@ -212,21 +182,6 @@ var uniforms = {
 		"color21": 0x960000,
 		"color22": 0x000000,
 		"color23": 0x960000,
-	},
-	"cah": {
-		"name": 'Club Atletico Huracán',
-		"type": Uniform.COUNTRY,
-		"emoji": '⚪🔴⚪',
-		"angle": 60,
-		"textcolor": 0xFF122A,
-		"color1": 0xFFF7F7,
-		"color2": 0xEDE6E6,
-		"color3": 0xE3DCDC,
-		"angle2": 0,
-		"textcolor2": 0xFFFFFF,
-		"color21": 0xED213C,
-		"color22": 0xC91C34,
-		"color23": 0xED213C,
 	},
 	"ph": {
 		"name": 'Pichang Heroes',
@@ -258,7 +213,127 @@ var uniforms = {
 		"color22": 0xFFFFFF,
 		"color23": 0xFFFFFF,
 	},
+	"dk": {
+		"name": 'Deportivo Kaiser',
+		"type": Uniform.COUNTRY,
+		"emoji": '🔵⚪',
+		"angle": 30,
+		"textcolor": 0xffffff,
+		"color1": 0x042566,
+		"color2": 0x052B7A,
+		"color3": 0x063391,
+		"angle2": 30,
+		"textcolor2": 0x050326,
+		"color21": 0xF2F2F2,
+		"color22": 0xEDEDED,
+		"color23": 0xE8E8E8,
+	},
 
+    /* SEGUNDA */
+		"ue": {
+		"name": 'Unión Española',
+		"type": Uniform.SEGUNDA,
+		"angle": 60,
+		"textcolor": 0xFFF70F,
+        "color1": 0xFF1919,
+        "color2": 0xFF1919,
+        "color3": 0xFF1919,
+		"angle2": 60,
+		"textcolor2": 0xF2EB0E,
+		"color21": 0x0D0101,
+		"color22": 0x0D0101,
+		"color23": 0x0D0101,
+	},
+	    "pfc": {
+		"name": 'Papus FC',
+		"type": Uniform.SEGUNDA,
+		"angle": 0,
+		"textcolor": 0xFFFFFF,
+		"color1": 0x000000,
+		"color2": 0xAD0000,
+		"color3": null,
+		"angle2": 40,
+		"textcolor2": 0xFFFFFF,
+		"color21": 0x8A0000,
+		"color22": 0xE3EB00,
+		"color23": 0x000000,	
+	},
+	"stk": {
+		"name": 'Stabaek',
+		"type": Uniform.SEGUNDA,
+		"emoji": '⚫🟡⚫',
+		"angle": 45,
+		"textcolor": 0x000000,
+		"color1": 0xDCB900,
+		"color2": 0xE6FFF9,
+		"color3": 0xDCB900,
+		"angle2": 45,
+		"textcolor2": 0xFFFFFF,
+		"color21": 0x000000,
+		"color22": 0xDCB900,
+		"color23": 0x000000,
+	},
+	"tka": {
+		"name": 'Tekya FC',
+		"type": Uniform.SEGUNDA,
+		"emoji": '⚫🟡⚫',
+		"angle": 90,
+		"textcolor": 0xFFFFFF,
+		"color1": 0xFF0000,
+		"color2": 0xFF0000,
+		"color3": 0xFF0000,
+		"angle2": 0,
+		"textcolor2": 0x000000,
+		"color21": 0xFFFFFF,
+		"color22": 0xFFFFFF,
+		"color23": 0xFFFFFF,
+	},
+	"nb": {
+		"name": 'Neo Bastards',
+		"type": Uniform.SEGUNDA,
+		"emoji": '⚫🟡⚫',
+		"angle": 60,
+		"textcolor": 0xFF740A,
+		"color1": 0x2E2E2E,
+		"color2": 0x1C1C1C,
+		"color3": 0x000000,
+		"angle2": 60,
+		"textcolor2": 0x000000,
+		"color21": 0xFF740A,
+		"color22": 0xDB6409,
+		"color23": 0xC45908,
+	},
+	"cha": {
+		"name": 'C.A Chacarita Juniors',
+		"type": Uniform.SEGUNDA,
+		"emoji": '⚫🟡⚫',
+		"angle": 60,
+		"textcolor": 0xBF1313,
+		"color1": 0x000000,
+		"color2": 0x000000,
+		"color3": 0x000000,
+		"angle2": 60,
+		"textcolor2": 0x9C1717,
+		"color21": 0xB0B0B0,
+		"color22": 0xB0B0B0,
+		"color23": 0xB0B0B0,
+	},
+	"wm": {
+		"name": 'Wolfs of Minnesota',
+		"type": Uniform.SEGUNDA,
+		"emoji": '🔵⚫',
+		"angle": 90,
+		"textcolor": 0xFFFFFF,
+		"color1": 0x004D99,
+		"color2": 0x00004A,
+		"color3": 0x00004A,
+		"angle2": 0,
+		"textcolor2": 0x004D99,
+		"color21": 0x00004A,
+		"color22": 0xFFFFFF,
+		"color23": 0xFFFFFF,
+	},
+	
 	/* ESTANDAR */
 		"red": {
 		"name": 'Rojo',
@@ -333,12 +408,6 @@ var SMSet = new Set(); // Set created to get slow mode which is useful in choose
 var banList = []; // Getting track of the bans, so we can unban ppl if we want
 const ranCooldownTime = 15000; // Tiempo de enfriamiento en milisegundos
 let ranCooldown = new Map(); // Mapa para realizar el seguimiento del enfriamiento
-const randomFunnyPhrases = [
-  "Mi abuelito dijo 👴: si clavai la estaca no se escapa la vaca.",
-  "Y recuerden chicos, sin gorrito ¡no hay fiesta!🥳",
-  "Entre más arrugada la pasa, más dulce la fruta.🍓",
-  "Cállate un rato , cotorra culia 🤣"
-];
 
 /* STATS */
 
@@ -1528,23 +1597,32 @@ room.onPlayerChat = function (player, message) {
     }
     if (message.length === 1) {
         try {
-            var uniformString = "[🏆] 𝙴𝚀𝚄𝙸𝙿𝙾𝚂 𝙰𝙵𝙲𝚂 :";
-            for (const [key, value] of Object.entries(uniforms)) {
-                if (value.type === Uniform.COUNTRY) uniformString += ` ${value.name}: !uni ${key} |`;
-            }
-            uniformString += `\n`;
-            room.sendAnnouncement(uniformString, player.id, 0xFFFFFF, "bold", Notification.CHAT);
-            uniformString2 = "[🏆] 𝙴𝚂𝚃𝙰𝙽𝙳𝙰𝚁 :";
-            for (const [key, value] of Object.entries(uniforms)) {
-                if (value.type === Uniform.CLUBLA) uniformString2 += ` ${value.name}: !uni ${key} |`;
-            }
-            uniformString2 += `\n`;
-            room.sendAnnouncement(uniformString2, player.id, 0xFFFFFF, "bold", Notification.CHAT);
-            room.sendAnnouncement("Para elegir un uniforme para su equipo, escriba '!uni <nombre del equipo>'.", player.id, 0xFFFFFF, "bold", Notification.CHAT);
-        } catch (err) {
-            console.error(err);
-            room.sendAnnouncement("Elige un uniforme que exista.", player.id, 0xFFFFFF, "bold", Notification.CHAT);
-        }
+    var uniformString = "[🏆] 𝟷𝚛𝚊 𝙳𝚒𝚟𝚒𝚜𝚒𝚘𝚗 :";
+    for (const [key, value] of Object.entries(uniforms)) {
+        if (value.type === Uniform.COUNTRY) uniformString += ` ${value.name}: !uni ${key} |`;
+    }
+    uniformString += `\n`;
+    room.sendAnnouncement(uniformString, player.id, 0xFFFFFF, "bold", Notification.CHAT);
+
+    var uniformString2 = "[🏆] 𝟸𝚍𝚊 𝙳𝚒𝚟𝚒𝚜𝚒𝚘𝚗 :";
+    for (const [key, value] of Object.entries(uniforms)) {
+        if (value.type === Uniform.SEGUNDA) uniformString2 += ` ${value.name}: !uni ${key} |`;
+    }
+    uniformString2 += `\n`;
+    room.sendAnnouncement(uniformString2, player.id, 0xFFFFFF, "bold", Notification.CHAT);
+
+    var uniformString3 = "[🏆] 𝙴𝚂𝚃𝙰𝙽𝙳𝙰𝚁 :";
+    for (const [key, value] of Object.entries(uniforms)) {
+        if (value.type === Uniform.CLUBLA) uniformString3 += ` ${value.name}: !uni ${key} |`;
+    }
+    uniformString3 += `\n`;
+    room.sendAnnouncement(uniformString3, player.id, 0xFFFFFF, "bold", Notification.CHAT);
+
+    room.sendAnnouncement("Para elegir un uniforme para su equipo, escriba '!uni <nombre del equipo>'.", player.id, 0xFFFFFF, "bold", Notification.CHAT);
+} catch (err) {
+    console.error(err);
+    room.sendAnnouncement("Elige un uniforme que exista.", player.id, 0xFFFFFF, "bold", Notification.CHAT);
+}
     } else if (message.length >= 2) {
         try {
             var uniformName = getUniform(message[1].toLowerCase());
